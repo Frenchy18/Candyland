@@ -1,0 +1,5 @@
+Candyland spinner
+	Have center spinner tied to degrees
+	and have the degree margin decide color and double. Animate center to rotate based on degree.
+
+Minimum 720*(randomized number)
