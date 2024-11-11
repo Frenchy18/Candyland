@@ -29,11 +29,13 @@ public class DoublyLinkedList {
         size ++;
     }
 
-    public void moveForward() {
-        Node current = head;
-        while (current != null) {
+
+    public Node moveForward(Node currentSpace, int steps) {
+        Node current = currentSpace;
+        for (int i = 0; i < steps && current != null; i++){
             current = current.next;
         }
+        return current;
     }
 
     public void moveBackwards(){
