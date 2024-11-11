@@ -29,7 +29,6 @@ public class DoublyLinkedList {
         size ++;
     }
 
-
     public Node moveForward(Node currentSpace, int steps) {
         Node current = currentSpace;
         for (int i = 0; i < steps && current != null; i++){
