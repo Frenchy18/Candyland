@@ -37,10 +37,22 @@ public class DoublyLinkedList {
         return current;
     }
 
-    public void moveBackwards(){
-        Node current = tail;
-        while (current != null){
+    public Node moveBackwards(Node currentSpace, int steps){
+        Node current = currentSpace;
+        for (int i = 0; i < steps && current != null; i++){
             current = current.prev;
         }
+        return current;
+    }
+
+    public Node findSpaceNumber(int spaceNumber){
+        Node current = head;
+        while (current != null){
+            if (current.spaceNumber == spaceNumber){
+                return current; // return found space
+            }
+            current = current.next; // move next
+        }
+        return null; // return if it was not found
     }
 }
