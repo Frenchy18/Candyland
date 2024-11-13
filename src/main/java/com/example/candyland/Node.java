@@ -1,4 +1,4 @@
-package src.main.java.com.example.candyland;
+package com.example.candyland;
 
 
 // add event variable

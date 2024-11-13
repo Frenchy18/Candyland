@@ -1,4 +1,4 @@
-package src.main.java.com.example.candyland;
+package com.example.candyland;
 
 // create linked list size
 
@@ -28,21 +28,27 @@ public class DoublyLinkedList {
         }
         size ++;
     }
-
-    public Node moveForward(Node currentSpace, int steps) {
+    // do while loop and change int steps to space color
+    public Node moveForward(Node currentSpace, String spaceColor) {
         Node current = currentSpace;
-        for (int i = 0; i < steps && current != null; i++){
+        do {
+            current = current.next;
+        } while (current != null && !currentSpace.spaceColor.equals(spaceColor));{
             current = current.next;
         }
         return current;
     }
 
-    public Node moveBackwards(Node currentSpace, int steps){
+
+    public Node moveBackwards(Node currentSpace, String spaceColor){
         Node current = currentSpace;
-        for (int i = 0; i < steps && current != null; i++){
+        do {
+            current = current.prev;
+        } while (current != null && !currentSpace.spaceColor.equals(spaceColor));{
             current = current.prev;
         }
         return current;
+
     }
 
     public Node findSpaceNumber(int spaceNumber){
