@@ -2,6 +2,7 @@ package com.example.candyland;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -15,12 +16,17 @@ public class CandyLand extends Application {
      */
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader gameloader = new FXMLLoader(CandyLand.class.getResource("Candyland_Menu.fxml"));
-        Scene gameMenu = new Scene(gameloader.load(), 1280,720);
+        FXMLLoader gameLoader = new FXMLLoader(CandyLand.class.getResource("Candyland_Menu.fxml"));
+        Scene gameMenu = new Scene(gameLoader.load(), 1280, 720);
         stage.setTitle("CandyLand");
         stage.setScene(gameMenu);
         stage.show();
     }
 
     public static void main(String[] args) {launch(); }
+
+    public void  buttonEndGame(Stage stage) {
+
+        stage.close();
+    }
 }

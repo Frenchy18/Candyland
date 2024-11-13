@@ -14,7 +14,7 @@
          <children>
             <ImageView blendMode="DARKEN" fitHeight="720.0" fitWidth="1280.0" layoutX="-76.0" layoutY="-403.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="-400.0">
                <image>
-                  <Image url="@../../../../../../../../IdeaProjects/CandyLand/src/main/resources/images/MainMenuScreen.jpg" />
+                  <Image url="@../../../../resources/images/MainMenuScreen.jpg" />
                </image>
             </ImageView>
           <Button fx:id="buttonStartGame" layoutX="392.0" layoutY="62.0" mnemonicParsing="false" snapToPixel="false" text="Start Game" AnchorPane.rightAnchor="600.0">
@@ -32,7 +32,7 @@
    <top>
       <ImageView fitHeight="400.0" fitWidth="680.0" BorderPane.alignment="CENTER">
          <image>
-            <Image url="@../../../../../../../../IdeaProjects/CandyLand/src/main/resources/images/CandyLand_Title.png" />
+            <Image url="@../../../../resources/images/CandyLand_Title.png" />
          </image>
       </ImageView>
    </top>
