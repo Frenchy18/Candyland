@@ -9,4 +9,11 @@ public class CandyLandController {
     protected void buttonEndGame() {
         System.exit(0);
     }
+    /*
+    @FXML
+    protected void buttonStartGame( event) {
+        System.load("CandyLand_PlayerScreen.fxml");
+    }
+    */
+
 }
