@@ -2,6 +2,8 @@ package com.example.candyland;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.beans.value.ChangeListener;
+import javafx.event.ActionEvent;
 
 public class CandyLandController {
 
