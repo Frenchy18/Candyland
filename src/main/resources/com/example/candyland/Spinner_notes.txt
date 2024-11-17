@@ -1,0 +1,34 @@
+My notes for degrees for the spinner and their corresponding colors:
+
+Red_Single:
+    (279) through (300)
+Red_Double:
+    (94) through (116)
+Green_Single:
+    (340) through (5)
+Green_Double:
+    (156) through (184)
+Blue_Single:
+    (226) through (249)
+Blue_Double:
+    (45) through (68)
+Yellow_Single:
+    (69) through (93)
+Yellow_Double:
+    (250) through (278)
+Orange_Single:
+    (185) through (214)
+Orange_Double:
+    (6) through (32)
+Purple_Single:
+    (117) through (143)
+Purple_Double:
+    (301) through (328)
+Pink 1 Peppermint:
+    (34) through (44)
+Pink 2 Cupcake:
+    (144) through (155)
+Pink 3 GingerBread:
+    (215) through (225)
+Pink 4 Candy/Lollipop:
+    (329) through (339)
