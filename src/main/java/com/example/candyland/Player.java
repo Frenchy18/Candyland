@@ -1,6 +1,7 @@
 package com.example.candyland;
 
 public class Player {
+    public Node currentSpace;
     private String name;           // Name of the player
     private int playerNumber;      // Identifier for the player
     private Piece piece;           // Game piece for the player
