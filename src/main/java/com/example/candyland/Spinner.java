@@ -1,6 +1,6 @@
 /**
  * PROGRAM PURPOSE: To create a spinner class capable of creating a spinner object returning random
- * colors to dictate user movement, calling methods of the piece and doublylinkedlist classes in order to
+ * colors to dictate user movement, calling methods of the player and doublylinkedlist classes in order to
  * store and change data depending on results of spinner
  * Author: Chase Lewis
  * Date: 11/14/2024
@@ -9,20 +9,20 @@
 package com.example.candyland;
 import java.util.Random;
 /**
- * Allows for creation of spinner object for given pieces, allowing for traversal through doublylinkedlist
+ * Allows for creation of spinner object for given player pieces, allowing for traversal through doublylinkedlist
  * to simulate candyland board and movement of individual players throughout the game
  */
 public class Spinner {
-    private Piece piece1;
-    private Piece piece2;
-    private Piece piece3;
-    private Piece piece4;
+    private Player piece1;
+    private Player piece2;
+    private Player piece3;
+    private Player piece4;
     /**
      * Constructs spinner object for 2 players
      * @param piece1 the piece of player 1
      * @param piece2 the piece of player 2
      */
-    Spinner (Piece piece1, Piece piece2) {
+    Spinner (Player piece1, Player piece2) {
         this.piece1 = piece1;
         this.piece2 = piece2;
     }
@@ -32,7 +32,7 @@ public class Spinner {
      * @param piece2 the piece of player 2
      * @param piece3 the piece of player 3
      */
-    Spinner (Piece piece1, Piece piece2, Piece piece3) {
+    Spinner (Player piece1, Player piece2, Player piece3) {
         this.piece1 = piece1;
         this.piece2 = piece2;
         this.piece3 = piece3;
@@ -44,7 +44,7 @@ public class Spinner {
      * @param piece3 the piece of player 3
      * @param piece4 the piece of player 4
      */
-    Spinner (Piece piece1, Piece piece2, Piece piece3, Piece piece4) {
+    Spinner (Player piece1, Player piece2, Player piece3, Player piece4) {
         this.piece1 = piece1;
         this.piece2 = piece2;
         this.piece3 = piece3;
@@ -62,9 +62,9 @@ public class Spinner {
     /**
      * Gets random result using spin method which dictates movement of piece
      * across the board/doublylinkedlist using switches for each possible spin result
-     * @param piece the particular piece being moved during player's turn
+     * @param piece the particular player being moved during player's turn
      */
-    public void movePiece(Piece piece) {
+    public void movePiece(Player piece) {
         int resultNum = spin();
         switch (resultNum) {
             case 0: // red
