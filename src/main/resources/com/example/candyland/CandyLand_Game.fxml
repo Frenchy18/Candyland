@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.candyland.CandyLandController">
+   <children>
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0">
+         <children>
+            <ImageView blendMode="DARKEN" fitHeight="720.0" fitWidth="1280.0">
+               <image>
+                  <Image url="@../../../images/Boardgame_Background.jpg" />
+               </image>
+            </ImageView>
+            <AnchorPane blendMode="SRC_ATOP" prefHeight="720.0" prefWidth="1280.0">
+               <children>
+                  <ImageView fx:id="Pink_3_Gingerbread" fitHeight="50.0" fitWidth="50.0" layoutX="42.0" layoutY="287.0">
+                     <image>
+                        <Image url="@../../../images/pink3_GingerBread.PNG" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="Pink_1_Peppermint" fitHeight="50.0" fitWidth="50.0" layoutX="714.0" layoutY="624.0">
+                     <image>
+                        <Image url="@../../../images/pink1_Peppermint.PNG" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="Pink_2_Cupcake" fitHeight="50.0" fitWidth="50.0" layoutX="689.0" layoutY="474.0">
+                     <image>
+                        <Image url="@../../../images/pink2_CupCake.PNG" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="Pink_4_Candy" fitHeight="50.0" fitWidth="50.0" layoutX="640.0" layoutY="113.0">
+                     <image>
+                        <Image url="@../../../images/pink4_Candy.PNG" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+         </children></AnchorPane>
+      <AnchorPane prefHeight="720.0" prefWidth="1280.0">
+         <children>
+            <ImageView fx:id="GameStartSquare" fitHeight="50.0" fitWidth="50.0" layoutX="66.0" layoutY="624.0">
+               <image>
+                  <Image url="@../../../images/rainbow_square.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="Red_1" fitHeight="50.0" fitWidth="50.0" layoutX="116.0" layoutY="624.0">
+               <image>
+                  <Image url="@../../../images/red_square.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="Green_1" fitHeight="50.0" fitWidth="50.0" layoutX="166.0" layoutY="624.0">
+               <image>
+                  <Image url="@../../../images/green_square.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="Blue_1" fitHeight="50.0" fitWidth="50.0" layoutX="216.0" layoutY="624.0">
+               <image>
+                  <Image url="@../../../images/blue_square.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="Yellow_1" fitHeight="50.0" fitWidth="50.0" layoutX="266.0" layoutY="624.0">
+               <image>
+                  <Image url="@../../../images/yellow_square.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="Orange_1" fitHeight="50.0" fitWidth="50.0" layoutX="316.0" layoutY="624.0">
+               <image>
+                  <Image url="@../../../images/orange_square.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="Purple_1" fitHeight="50.0" fitWidth="50.0" layoutX="366.0" layoutY="624.0">
+               <image>
+                  <Image url="@../../../images/purple_square.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="Red_2" fitHeight="50.0" fitWidth="50.0" layoutX="416.0" layoutY="624.0">
+               <image>
+                  <Image url="@../../../images/red_square.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="Green_2" fitHeight="50.0" fitWidth="50.0" layoutX="466.0" layoutY="624.0">
+               <image>
+                  <Image url="@../../../images/green_square.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="Blue_2" fitHeight="50.0" fitWidth="50.0" layoutX="516.0" layoutY="624.0">
+               <image>
+                  <Image url="@../../../images/blue_square.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="Yellow_2" fitHeight="50.0" fitWidth="50.0" layoutX="566.0" layoutY="624.0">
+               <image>
+                  <Image url="@../../../images/yellow_square.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="Orange_2" fitHeight="50.0" fitWidth="50.0" layoutX="615.0" layoutY="624.0">
+               <image>
+                  <Image url="@../../../images/orange_square.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="Purple_2" fitHeight="50.0" fitWidth="50.0" layoutX="665.0" layoutY="624.0">
+               <image>
+                  <Image url="@../../../images/purple_square.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="Red_3" fitHeight="50.0" fitWidth="50.0" layoutX="764.0" layoutY="624.0">
+               <image>
+                  <Image url="@../../../images/red_square.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="Green_3" fitHeight="50.0" fitWidth="50.0" layoutX="814.0" layoutY="624.0">
+               <image>
+                  <Image url="@../../../images/green_square.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="Blue_3" fitHeight="50.0" fitWidth="50.0" layoutX="864.0" layoutY="624.0">
+               <image>
+                  <Image url="@../../../images/blue_square.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="Yellow_3" fitHeight="50.0" fitWidth="50.0" layoutX="914.0" layoutY="624.0">
+               <image>
+                  <Image url="@../../../images/yellow_square.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="Orange_3" fitHeight="50.0" fitWidth="50.0" layoutX="964.0" layoutY="624.0">
+               <image>
+                  <Image url="@../../../images/orange_square.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="Purple_3" fitHeight="50.0" fitWidth="50.0" layoutX="1014.0" layoutY="599.0">
+               <image>
+                  <Image url="@../../../images/purple_square.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="Red_4" fitHeight="50.0" fitWidth="50.0" layoutX="989.0" layoutY="549.0">
+               <image>
+                  <Image url="@../../../images/red_square.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="Green_4" fitHeight="50.0" fitWidth="50.0" layoutX="939.0" layoutY="524.0">
+               <image>
+                  <Image url="@../../../images/green_square.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="Blue_4" fitHeight="50.0" fitWidth="50.0" layoutX="889.0" layoutY="499.0">
+               <image>
+                  <Image url="@../../../images/blue_square.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="Yellow_4" fitHeight="50.0" fitWidth="50.0" layoutX="839.0" layoutY="474.0">
+               <image>
+                  <Image url="@../../../images/yellow_square.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="Orange_4" fitHeight="50.0" fitWidth="50.0" layoutX="789.0" layoutY="474.0">
+               <image>
+                  <Image url="@../../../images/orange_square.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="Purple_4" fitHeight="50.0" fitWidth="50.0" layoutX="739.0" layoutY="474.0">
+               <image>
+                  <Image url="@../../../images/purple_square.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="Red_5" fitHeight="50.0" fitWidth="50.0" layoutX="640.0" layoutY="474.0">
+               <image>
+                  <Image url="@../../../images/red_square.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="Green_5" fitHeight="50.0" fitWidth="50.0" layoutX="591.0" layoutY="474.0">
+               <image>
+                  <Image url="@../../../images/green_square.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="Blue_5" fitHeight="50.0" fitWidth="50.0" layoutX="541.0" layoutY="474.0">
+               <image>
+                  <Image url="@../../../images/blue_square.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="Yellow_5" fitHeight="50.0" fitWidth="50.0" layoutX="491.0" layoutY="474.0">
+               <image>
+                  <Image url="@../../../images/yellow_square.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="Orange_5" fitHeight="50.0" fitWidth="50.0" layoutX="441.0" layoutY="459.0">
+               <image>
+                  <Image url="@../../../images/orange_square.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="Purple_5" fitHeight="50.0" fitWidth="50.0" layoutX="391.0" layoutY="434.0">
+               <image>
+                  <Image url="@../../../images/purple_square.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="Red_6" fitHeight="50.0" fitWidth="50.0" layoutX="341.0" layoutY="409.0">
+               <image>
+                  <Image url="@../../../images/red_square.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="Green_6" fitHeight="50.0" fitWidth="50.0" layoutX="291.0" layoutY="384.0">
+               <image>
+                  <Image url="@../../../images/green_square.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="Blue_6" fitHeight="50.0" fitWidth="50.0" layoutX="241.0" layoutY="359.0">
+               <image>
+                  <Image url="@../../../images/blue_square.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="Yellow_6" fitHeight="50.0" fitWidth="50.0" layoutX="191.0" layoutY="335.0">
+               <image>
+                  <Image url="@../../../images/yellow_square.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="Orange_6" fitHeight="50.0" fitWidth="50.0" layoutX="141.0" layoutY="334.0">
+               <image>
+                  <Image url="@../../../images/orange_square.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="Purple_6" fitHeight="50.0" fitWidth="50.0" layoutX="91.0" layoutY="310.0">
+               <image>
+                  <Image url="@../../../images/purple_square.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="Red_7" fitHeight="50.0" fitWidth="50.0" layoutX="41.0" layoutY="238.0">
+               <image>
+                  <Image url="@../../../images/red_square.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="Green_7" fitHeight="50.0" fitWidth="50.0" layoutX="91.0" layoutY="213.0">
+               <image>
+                  <Image url="@../../../images/green_square.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="Blue_7" fitHeight="50.0" fitWidth="50.0" layoutX="141.0" layoutY="213.0">
+               <image>
+                  <Image url="@../../../images/blue_square.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="Yellow_7" fitHeight="50.0" fitWidth="50.0" layoutX="191.0" layoutY="238.0">
+               <image>
+                  <Image url="@../../../images/yellow_square.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="Orange_7" fitHeight="50.0" fitWidth="50.0" layoutX="241.0" layoutY="238.0">
+               <image>
+                  <Image url="@../../../images/orange_square.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="Purple_7" fitHeight="50.0" fitWidth="50.0" layoutX="291.0" layoutY="213.0">
+               <image>
+                  <Image url="@../../../images/purple_square.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="Red_8" fitHeight="50.0" fitWidth="50.0" layoutX="341.0" layoutY="188.0">
+               <image>
+                  <Image url="@../../../images/red_square.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="Green_8" fitHeight="50.0" fitWidth="50.0" layoutX="391.0" layoutY="188.0">
+               <image>
+                  <Image url="@../../../images/green_square.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="Blue_8" fitHeight="50.0" fitWidth="50.0" layoutX="441.0" layoutY="163.0">
+               <image>
+                  <Image url="@../../../images/blue_square.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="Yellow_8" fitHeight="50.0" fitWidth="50.0" layoutX="491.0" layoutY="163.0">
+               <image>
+                  <Image url="@../../../images/yellow_square.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="Orange_8" fitHeight="50.0" fitWidth="50.0" layoutX="541.0" layoutY="138.0">
+               <image>
+                  <Image url="@../../../images/orange_square.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="Purple_8" fitHeight="50.0" fitWidth="50.0" layoutX="591.0" layoutY="113.0">
+               <image>
+                  <Image url="@../../../images/purple_square.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="Red_9" fitHeight="50.0" fitWidth="50.0" layoutX="690.0" layoutY="88.0">
+               <image>
+                  <Image url="@../../../images/red_square.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="Green_9" fitHeight="50.0" fitWidth="50.0" layoutX="739.0" layoutY="63.0">
+               <image>
+                  <Image url="@../../../images/green_square.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="Blue_9" fitHeight="50.0" fitWidth="50.0" layoutX="789.0" layoutY="63.0">
+               <image>
+                  <Image url="@../../../images/blue_square.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="Yellow_9" fitHeight="50.0" fitWidth="50.0" layoutX="839.0" layoutY="88.0">
+               <image>
+                  <Image url="@../../../images/yellow_square.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="Orange_9" fitHeight="50.0" fitWidth="50.0" layoutX="889.0" layoutY="88.0">
+               <image>
+                  <Image url="@../../../images/orange_square.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="Purple_9" fitHeight="50.0" fitWidth="50.0" layoutX="939.0" layoutY="88.0">
+               <image>
+                  <Image url="@../../../images/purple_square.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="Red_10" fitHeight="50.0" fitWidth="50.0" layoutX="989.0" layoutY="113.0">
+               <image>
+                  <Image url="@../../../images/red_square.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="Green_10" fitHeight="50.0" fitWidth="50.0" layoutX="1039.0" layoutY="138.0">
+               <image>
+                  <Image url="@../../../images/green_square.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="Blue_10" fitHeight="50.0" fitWidth="50.0" layoutX="1089.0" layoutY="163.0">
+               <image>
+                  <Image url="@../../../images/blue_square.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="Yellow_10" fitHeight="50.0" fitWidth="50.0" layoutX="1089.0" layoutY="213.0">
+               <image>
+                  <Image url="@../../../images/yellow_square.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="Orange_10" fitHeight="50.0" fitWidth="50.0" layoutX="1114.0" layoutY="263.0">
+               <image>
+                  <Image url="@../../../images/orange_square.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="Purple_10" fitHeight="50.0" fitWidth="50.0" layoutX="1139.0" layoutY="313.0">
+               <image>
+                  <Image url="@../../../images/purple_square.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="GameEndSquare" fitHeight="50.0" fitWidth="50.0" layoutX="1164.0" layoutY="363.0">
+               <image>
+                  <Image url="@../../../images/rainbow_square.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </children>
+</Pane>
