@@ -1,6 +1,6 @@
 package com.example.candyland;
 
-public class Player {
+public class Players {
     public Node currentSpace;
     private String name;           // Name of the player
     private int playerNumber;      // Identifier for the player
@@ -8,7 +8,7 @@ public class Player {
     private boolean isWinner;      // If any player has won
     private int totalMoves;        // Total moves to help keep track of rounds
 
-    public Player(String name, int playerNumber, Node startingSpace) {
+    public Players(String name, int playerNumber, Node startingSpace) {
         this.name = name;
         this.playerNumber = playerNumber;
         this.piece = new Piece(startingSpace);

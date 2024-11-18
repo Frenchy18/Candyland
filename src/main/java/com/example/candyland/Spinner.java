@@ -13,16 +13,16 @@ import java.util.Random;
  * to simulate candyland board and movement of individual players throughout the game
  */
 public class Spinner {
-    private Player piece1;
-    private Player piece2;
-    private Player piece3;
-    private Player piece4;
+    private Players piece1;
+    private Players piece2;
+    private Players piece3;
+    private Players piece4;
     /**
      * Constructs spinner object for 2 players
      * @param piece1 the piece of player 1
      * @param piece2 the piece of player 2
      */
-    Spinner (Player piece1, Player piece2) {
+    Spinner (Players piece1, Players piece2) {
         this.piece1 = piece1;
         this.piece2 = piece2;
     }
@@ -32,7 +32,7 @@ public class Spinner {
      * @param piece2 the piece of player 2
      * @param piece3 the piece of player 3
      */
-    Spinner (Player piece1, Player piece2, Player piece3) {
+    Spinner (Players piece1, Players piece2, Players piece3) {
         this.piece1 = piece1;
         this.piece2 = piece2;
         this.piece3 = piece3;
@@ -44,7 +44,7 @@ public class Spinner {
      * @param piece3 the piece of player 3
      * @param piece4 the piece of player 4
      */
-    Spinner (Player piece1, Player piece2, Player piece3, Player piece4) {
+    Spinner (Players piece1, Players piece2, Players piece3, Players piece4) {
         this.piece1 = piece1;
         this.piece2 = piece2;
         this.piece3 = piece3;
@@ -64,7 +64,7 @@ public class Spinner {
      * across the board/doublylinkedlist using switches for each possible spin result
      * @param piece the particular player being moved during player's turn
      */
-    public void movePiece(Player piece) {
+    public void movePiece(Players piece) {
         int resultNum = spin();
         switch (resultNum) {
             case 0: // red

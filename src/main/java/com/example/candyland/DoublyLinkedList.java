@@ -8,7 +8,7 @@ public class DoublyLinkedList {
     public DoublyLinkedList(){
         this.head = null;
         this.tail = null;
-        this.size = 0;
+        this.size = 65;
     }
 
     /**
