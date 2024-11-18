@@ -25,9 +25,9 @@ public class Player {
         return playerNumber;
     }
 
-    public Piece getPiece() {
-        return piece;
-    }
+//    public Piece getPiece() {
+//        return piece;
+//    }
 
     public boolean isWinner() {
         return isWinner;
