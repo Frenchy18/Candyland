@@ -5,8 +5,15 @@ import com.example.candyland.*;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+// fix this
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import javafx.scene.Node;
+import java.io.IOException;
 
 public class CandyLandController {
     // creating variable names
@@ -14,12 +21,105 @@ public class CandyLandController {
     private Spinner spinner;
     private Players players;
 
-    // all fd:id's will be added to this section
-    @FXML
-    private Label labelExampleUntilGUIisComplete; // label to show player's current space
+    // start menu fx:id's:
+    @FXML private Button buttonStartGame; // Menu screen start
+    @FXML private Button buttonEndGame; // Menu screen exit
+
+    // event handlers for the start menu
+    @FXML void buttonStartGame(ActionEvent start) {
+        try {
+            // load the game screen
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("CandyLand_Game.fxml"));
+            Scene scene = new Scene(loader.load());
+
+            // get the current stage
+            Stage stage = (Stage) ((Node) start.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     @FXML
-    private Button buttonExampleUntilGUIisComplete; // Spinner button
+    private void buttonEndGame(ActionEvent exit) {
+        // get the current stage and close it
+        Stage stage = (Stage) ((Node) exit.getSource()).getScene().getWindow();
+        stage.close();
+    }
+
+    // Game board fx:id's
+    @FXML private ImageView GameStartSquare; // where each player will start
+    @FXML private ImageView Red_1;
+    @FXML private ImageView Green_1;
+    @FXML private ImageView Blue_1;
+    @FXML private ImageView Yellow_1;
+    @FXML private ImageView Orange_1;
+    @FXML private ImageView Purple_1;
+    @FXML private ImageView Red_2;
+    @FXML private ImageView Green_2;
+    @FXML private ImageView Blue_2;
+    @FXML private ImageView Yellow_2;
+    @FXML private ImageView Orange_2;
+    @FXML private ImageView Purple_2;
+    @FXML private ImageView Red_3;
+    @FXML private ImageView Green_3;
+    @FXML private ImageView Blue_3;
+    @FXML private ImageView Yellow_3;
+    @FXML private ImageView Orange_3;
+    @FXML private ImageView Purple_3;
+    @FXML private ImageView Red_4;
+    @FXML private ImageView Green_4;
+    @FXML private ImageView Blue_4;
+    @FXML private ImageView Yellow_4;
+    @FXML private ImageView Orange_4;
+    @FXML private ImageView Purple_4;
+    @FXML private ImageView Red_5;
+    @FXML private ImageView Green_5;
+    @FXML private ImageView Blue_5;
+    @FXML private ImageView Yellow_5;
+    @FXML private ImageView Orange_5;
+    @FXML private ImageView Purple_5;
+    @FXML private ImageView Red_6;
+    @FXML private ImageView Green_6;
+    @FXML private ImageView Blue_6;
+    @FXML private ImageView Yellow_6;
+    @FXML private ImageView Orange_6;
+    @FXML private ImageView Purple_6;
+    @FXML private ImageView Red_7;
+    @FXML private ImageView Green_7;
+    @FXML private ImageView Blue_7;
+    @FXML private ImageView Yellow_7;
+    @FXML private ImageView Orange_7;
+    @FXML private ImageView Purple_7;
+    @FXML private ImageView Red_8;
+    @FXML private ImageView Green_8;
+    @FXML private ImageView Blue_8;
+    @FXML private ImageView Yellow_8;
+    @FXML private ImageView Orange_8;
+    @FXML private ImageView Purple_8;
+    @FXML private ImageView Red_9;
+    @FXML private ImageView Green_9;
+    @FXML private ImageView Blue_9;
+    @FXML private ImageView Yellow_9;
+    @FXML private ImageView Orange_9;
+    @FXML private ImageView Purple_9;
+    @FXML private ImageView Red_10;
+    @FXML private ImageView Green_10;
+    @FXML private ImageView Blue_10;
+    @FXML private ImageView Yellow_10;
+    @FXML private ImageView Orange_10;
+    @FXML private ImageView Purple_10;
+    @FXML private ImageView GameEndSquare;
+    @FXML private ImageView Pink_3_Gingerbread;
+    @FXML private ImageView Pink_1_Peppermint;
+    @FXML private ImageView Pink_2_Cupcake;
+    @FXML private ImageView Pink_4_Candy;
+    @FXML private ImageView Spinner_Spinner;
+    @FXML private Button activateSpinnerButton;
+    @FXML private Button exitGameButton;
+    @FXML private Label playerTurnLabel;
+
 
     /** EVENT HANDLERS BELOW HERE
     // 1. Event Handler for when player clicks "start game"
@@ -34,7 +134,7 @@ public class CandyLandController {
      */
 
     @FXML
-    private void calculateButtonPressed(ActionEvent event) {// this is where the first EH will go
+    private void calculateButtonPressed(ActionEvent event) {
          }; // this code will open and display the next fxml file
 
     @FXML
