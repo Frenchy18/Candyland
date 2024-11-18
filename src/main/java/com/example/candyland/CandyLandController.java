@@ -6,6 +6,7 @@ import com.example.candyland.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
 public class CandyLandController {
     // creating variable names
@@ -56,12 +57,9 @@ public class CandyLandController {
     // player 1 clicks the spinner. after the spinner result, using dll,
     // player moves based on the spinner result...
 
-
-
-
     // ending the game
-    //@FXML
-    //protected void buttonEndGame() {
-      //  System.exit(0);
-    //}
+    @FXML
+    protected void buttonEndGame() {
+        System.exit(0);
+    }
 }

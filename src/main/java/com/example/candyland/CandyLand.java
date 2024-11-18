@@ -19,6 +19,7 @@ public class CandyLand extends Application {
         FXMLLoader gameLoader = new FXMLLoader(CandyLand.class.getResource("Candyland_Menu.fxml"));
         Scene gameMenu = new Scene(gameLoader.load(), 1100, 720);
         stage.setTitle("CandyLand");
+        stage.getIcons();
         stage.setScene(gameMenu);
         stage.show();
     }
