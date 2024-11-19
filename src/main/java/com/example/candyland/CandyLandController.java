@@ -20,8 +20,6 @@ import java.util.List;
 
 public class CandyLandController {
     // creating variable names
-    private int numberOfPlayers;
-
     private DoublyLinkedList gameMoves;
     private Spinner spinner;
     private Players players;
@@ -37,7 +35,6 @@ public class CandyLandController {
     @FXML private ImageView playerTwoPiece;
     @FXML private ImageView playerThreePiece;
     @FXML private ImageView playerFourPiece;
-
 
 
     // event handlers for the start menu
@@ -61,17 +58,6 @@ public class CandyLandController {
         // get the current stage and close it
         Stage stage = (Stage) ((Node) exit.getSource()).getScene().getWindow();
         stage.close();
-    }
-
-    @FXML
-    public void initialize() {
-        System.out.println("Controller initialized!");
-        System.out.println("playerOnePiece: " + playerOnePiece);
-        System.out.println("playerTwoPiece: " + playerTwoPiece);
-        System.out.println("playerThreePiece: " + playerThreePiece);
-        System.out.println("playerFourPiece: " + playerFourPiece);
-
-        setPlayersEnabled(0);
     }
 
     @FXML
@@ -113,6 +99,7 @@ public class CandyLandController {
             }
         }
     }
+
 
     // Game board fx:id's
     @FXML private ImageView GameStartSquare; // where each player will start
