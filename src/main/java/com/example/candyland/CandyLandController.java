@@ -29,7 +29,7 @@ public class CandyLandController {
     @FXML void buttonStartGame(ActionEvent start) {
         try {
             // load the game screen
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("CandyLand_Game.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("CandyLand_PlayerScreen.fxml"));
             Scene scene = new Scene(loader.load());
 
             // get the current stage
