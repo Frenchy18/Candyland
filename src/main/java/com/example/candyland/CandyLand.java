@@ -2,7 +2,6 @@ package com.example.candyland;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -19,15 +18,10 @@ public class CandyLand extends Application {
         FXMLLoader gameLoader = new FXMLLoader(CandyLand.class.getResource("Candyland_Menu.fxml"));
         Scene gameMenu = new Scene(gameLoader.load(), 1100, 720);
         stage.setTitle("CandyLand");
-        stage.getIcons();
         stage.setScene(gameMenu);
         stage.show();
     }
 
     public static void main(String[] args) {launch(); }
 
-    public void  buttonEndGame(Stage stage) {
-
-        stage.close();
-    }
 }

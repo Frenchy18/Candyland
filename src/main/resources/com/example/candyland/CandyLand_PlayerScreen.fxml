@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.candyland.CandyLandController">
    <children>
       <AnchorPane>
          <children>
@@ -25,7 +25,7 @@
                               <Image url="@../../../images/2_Player.png" />
                            </image>
                         </ImageView>
-                        <Button fx:id="buttonTwoPlayer" mnemonicParsing="false" opacity="0.0" prefHeight="462.0" prefWidth="291.0" text="2_Player" />
+                        <Button fx:id="buttonTwoPlayer" mnemonicParsing="false" opacity="0.0" prefHeight="462.0" prefWidth="291.0" text="2_Player" onAction="#buttonTwoPlayers" />
                      </children>
                   </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
@@ -35,7 +35,7 @@
                               <Image url="@../../../images/3_Player.png" />
                            </image>
                         </ImageView>
-                        <Button fx:id="buttonThreePlayer" mnemonicParsing="false" opacity="0.0" prefHeight="462.0" prefWidth="356.0" text="3_Player" />
+                        <Button fx:id="buttonThreePlayer" mnemonicParsing="false" opacity="0.0" prefHeight="462.0" prefWidth="356.0" text="3_Player" onAction="#buttonThreePlayers" />
                      </children>
                   </AnchorPane>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
@@ -45,7 +45,7 @@
                               <Image url="@../../../images/4_player.png" />
                            </image>
                         </ImageView>
-                        <Button fx:id="buttonFourPlayer" mnemonicParsing="false" opacity="0.0" prefHeight="460.0" prefWidth="327.0" text="4_Player" />
+                        <Button fx:id="buttonFourPlayer" mnemonicParsing="false" opacity="0.0" prefHeight="460.0" prefWidth="327.0" text="4_Player" onAction="#buttonFourPlayers" />
                      </children>
                   </AnchorPane>
               </items>
@@ -57,7 +57,7 @@
                         <Image url="@../../../images/back_arrow.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="playerScreenBackButton" layoutX="-1.0" layoutY="-1.0" mnemonicParsing="false" opacity="0.0" prefHeight="136.0" prefWidth="200.0" text="Go back to the main menu" />
+                  <Button fx:id="playerScreenBackButton" layoutX="-1.0" layoutY="-1.0" mnemonicParsing="false" opacity="0.0" prefHeight="136.0" prefWidth="200.0" text="Go back to the main menu" onAction="#buttonEndGame" />
                </children>
             </AnchorPane>
          </children>

@@ -15,8 +15,13 @@ import javafx.stage.Stage;
 import javafx.scene.Node;
 import java.io.IOException;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CandyLandController {
     // creating variable names
+    private int numberOfPlayers;
+
     private DoublyLinkedList gameMoves;
     private Spinner spinner;
     private Players players;
@@ -24,6 +29,16 @@ public class CandyLandController {
     // start menu fx:id's:
     @FXML private Button buttonStartGame; // Menu screen start
     @FXML private Button buttonEndGame; // Menu screen exit
+    @FXML private Button buttonTwoPlayer; // Two player button
+    @FXML private Button buttonThreePlayer; // Three player button
+    @FXML private Button buttonFourPlayer; // Four player button
+
+    @FXML private ImageView playerOnePiece;
+    @FXML private ImageView playerTwoPiece;
+    @FXML private ImageView playerThreePiece;
+    @FXML private ImageView playerFourPiece;
+
+
 
     // event handlers for the start menu
     @FXML void buttonStartGame(ActionEvent start) {
@@ -46,6 +61,57 @@ public class CandyLandController {
         // get the current stage and close it
         Stage stage = (Stage) ((Node) exit.getSource()).getScene().getWindow();
         stage.close();
+    }
+
+    @FXML
+    public void initialize() {
+        System.out.println("Controller initialized!");
+        System.out.println("playerOnePiece: " + playerOnePiece);
+        System.out.println("playerTwoPiece: " + playerTwoPiece);
+        System.out.println("playerThreePiece: " + playerThreePiece);
+        System.out.println("playerFourPiece: " + playerFourPiece);
+
+        setPlayersEnabled(0);
+    }
+
+    @FXML
+    private void buttonTwoPlayers(ActionEvent event) throws IOException {
+        navigateToGameScreen(event,2);
+    }
+
+    @FXML
+    private void buttonThreePlayers(ActionEvent event) throws IOException {
+        navigateToGameScreen(event,3);
+    }
+
+    @FXML
+    private void buttonFourPlayers(ActionEvent event) throws IOException {
+        navigateToGameScreen(event,4);
+    }
+
+    private void navigateToGameScreen(ActionEvent event, int numPlayers) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("CandyLand_Game.fxml"));
+        Scene scene = new Scene(loader.load());
+
+        CandyLandController controller = loader.getController();
+        controller.setPlayersEnabled(numPlayers);
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    private void setPlayersEnabled(int numPlayers) {
+        List<ImageView> playerPieces = List.of(playerOnePiece, playerTwoPiece, playerThreePiece, playerFourPiece);
+
+        for (int i = 0; i < playerPieces.size(); i++) {
+            ImageView piece = playerPieces.get(i);
+            if (piece != null) {
+                piece.setVisible(i < numPlayers); // Show pieces for active players
+            } else {
+                System.out.println("Warning: player piece " + (i + 1) + " is null!");
+            }
+        }
     }
 
     // Game board fx:id's
@@ -157,9 +223,4 @@ public class CandyLandController {
     // player 1 clicks the spinner. after the spinner result, using dll,
     // player moves based on the spinner result...
 
-    // ending the game
-    @FXML
-    protected void buttonEndGame() {
-        System.exit(0);
-    }
 }
