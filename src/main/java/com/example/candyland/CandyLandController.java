@@ -11,9 +11,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CandyLandController {
     // creating variable names
@@ -29,7 +32,7 @@ public class CandyLandController {
     @FXML void buttonStartGame(ActionEvent start) {
         try {
             // load the game screen
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("CandyLand_Game.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("CandyLand_PlayerScreen.fxml"));
             Scene scene = new Scene(loader.load());
 
             // get the current stage
@@ -47,6 +50,15 @@ public class CandyLandController {
         Stage stage = (Stage) ((Node) exit.getSource()).getScene().getWindow();
         stage.close();
     }
+
+    @FXML private Button buttonTwoPlayers;
+    @FXML private Button buttonThreePlayers;
+    @FXML private Button buttonFourPlayers;
+    @FXML private AnchorPane buttonGoBack;
+
+
+
+
 
     // Game board fx:id's
     @FXML private ImageView GameStartSquare; // where each player will start
