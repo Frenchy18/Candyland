@@ -5,6 +5,7 @@ package com.example.candyland;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Label;
 // fix this
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
@@ -75,8 +76,9 @@ public class CandyLandController {
         }
 
         if (targetSpace == null) {
-            System.out.println("Error: No valid target space for moveType: " + moveType);
-            return;
+            targetSpace = currentSpace.moveForward(currentSpace,"End");
+            System.out.println("Player "+ (currentTurn) +" You won!");
+            playerTurnLabel.setText("Player " + (currentTurn) + ", you won!");
         }
 
         // Update the player's current space and move the piece
@@ -114,6 +116,7 @@ public class CandyLandController {
     }
 
     @FXML private ImageView Spinner_Spinner;
+    @FXML private Label playerTurnLabel;
     @FXML
     private void spinTheWheel() {
         if (playersList == null || playersList.isEmpty()) {
@@ -144,6 +147,7 @@ public class CandyLandController {
                 movePlayer(currentPlayer,moveType);
 
                 currentTurn = (currentTurn+1) % playersList.size();
+                playerTurnLabel.setText("Player " + (currentTurn +1) + ", it's your turn!");
             });
             slowTransition.play();
         });

@@ -22,10 +22,10 @@ public class DoublyLinkedList {
 
         // Create nodes
         Node gameStart = new Node(0, "Start", 0, "Game Start", 66, 624);
-        Node red1 = new Node(1, "Red", 0, "Red Square", 66, 574);
-        Node yellow1 = new Node(2, "Yellow", 0, "Yellow Square", 116, 574);
-        Node green1 = new Node(3, "Green", 0, "Green Square", 166, 574);
-        Node blue1 = new Node(4, "Blue", 0, "Blue Square", 216, 574);
+        Node red1 = new Node(1, "Red", 0, "Red Square", 116, 574);
+        Node green1 = new Node(2, "Green", 0, "Green Square", 166, 574);
+        Node blue1 = new Node(3, "Blue", 0, "Blue Square", 216, 574);
+        Node yellow1 = new Node(4, "Yellow", 0, "Yellow Square", 116, 574);
         Node orange1 = new Node(5, "Orange", 0, "Orange Square", 266, 574);
         Node purple1 = new Node(6, "Purple", 0, "Purple Square", 316, 574);
         Node red2 = new Node(7, "Red", 0, "Red Square", 366, 574);
