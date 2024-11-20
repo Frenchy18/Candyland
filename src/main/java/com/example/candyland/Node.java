@@ -6,14 +6,16 @@ public class Node {
     int event;
     String eventMessage;
     int spaceNumber;
-    String spaceColor;
+    String color;
     Node prev;
     Node next;
+    private double x;
+    private double y;
 
-    public Node(int spaceNumber, String spaceColor, int event, String eventMessage) {
+    public Node(int spaceNumber, String color, int event, String eventMessage) {
         this.event = event;
         this.eventMessage = eventMessage;
-        this.spaceColor = spaceColor;
+        this.color = color;
         this.spaceNumber = spaceNumber;
         this.prev = null;
         this.next = null;
@@ -21,17 +23,18 @@ public class Node {
     /**
      * method moves the player forward
      * @param currentSpace
-     * @param spaceColor
+     * @param color
      * @return the current node after traversing forwards on the list
      */
-    public Node moveForward(Node currentSpace, String spaceColor) {
+    public Node moveForward(Node currentSpace, String color) {
         Node current = currentSpace;
-        do {
-            current = current.next;
-        } while (current != null && !current.spaceColor.equals(spaceColor));{
+        while (current != null) {
+            if (current.color.equals(color)) {
+                return current;
+            }
             current = current.next;
         }
-        return current;
+        return null;
     }
 
     /**
@@ -44,11 +47,19 @@ public class Node {
         Node current = currentSpace;
         do {
             current = current.prev;
-        } while (current != null && !current.spaceColor.equals(spaceColor));{
+        } while (current != null && !current.color.equals(spaceColor));{
             current = current.prev;
         }
         return current;
 
+    }
+
+    public double getX() {
+        return x;
+    }
+
+    public double getY() {
+        return y;
     }
 
 

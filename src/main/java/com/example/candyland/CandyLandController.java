@@ -17,7 +17,10 @@ import java.io.IOException;
 import javafx.animation.RotateTransition;
 import javafx.animation.Interpolator;
 import javafx.scene.effect.MotionBlur;
+import javafx.animation.TranslateTransition;
 import javafx.util.Duration;
+import org.controlsfx.control.tableview2.filter.filtereditor.SouthFilter;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +30,9 @@ public class CandyLandController {
     private DoublyLinkedList gameMoves;
     private Spinner spinner;
     private Players players;
+    private int currentTurn;
+    private List<Players> playersList;
+
 
     @FXML private ImageView playerOnePiece;
     @FXML private ImageView playerTwoPiece;
@@ -82,6 +88,7 @@ public class CandyLandController {
 
         CandyLandController controller = loader.getController();
         controller.setPlayersEnabled(numPlayers);
+        controller.setNumPlayers(numPlayers);
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);
@@ -101,9 +108,25 @@ public class CandyLandController {
         }
     }
 
+    private void setNumPlayers(int numPlayers) {
+        gameMoves = new DoublyLinkedList();
+        gameMoves.initializeBoard();
+        playersList = new ArrayList<>();
+        com.example.candyland.Node startNode = gameMoves.getStart();
+        for (int i = 0; i < numPlayers; i++) {
+            Players player = new Players("Player "+(i+1), i+1,startNode);
+            player.setCurrentSpace(startNode);
+            playersList.add(player);
+        }
+    }
+
     @FXML private ImageView Spinner_Spinner;
     @FXML
     private void spinTheWheel(ActionEvent event) {
+        if (playersList == null || playersList.isEmpty()) {
+            System.out.println("Error: playersList is empty");
+            return;
+        }
         RotateTransition rotateTransition = new RotateTransition(Duration.seconds(2),Spinner_Spinner);
         rotateTransition.setByAngle(1080);
         rotateTransition.setInterpolator(Interpolator.EASE_OUT);
@@ -121,8 +144,14 @@ public class CandyLandController {
             slowTransition.setInterpolator(Interpolator.EASE_OUT);
             slowTransition.setCycleCount(1);
             slowTransition.setOnFinished(ev -> {
-                int result = calculateSpinnerNumber(randomAngle);
-                System.out.println("Spinner result: "+result);
+                String moveType = determineMoveType(randomAngle);
+                System.out.println("Spinner landed on: "+moveType);
+
+                Players currentPlayer = playersList.get(currentTurn);
+                movePlayer(currentPlayer,moveType);
+
+                currentTurn = (currentTurn+1) % playersList.size();
+
             });
             slowTransition.play();
         });
@@ -130,36 +159,145 @@ public class CandyLandController {
         rotateTransition.play();
     }
 
-    private int calculateSpinnerNumber(double angle) {
-        int numSegments = 16;
-        double segmentSize = 360.0 / numSegments;
 
-        return (int) (angle / segmentSize);
+    private String determineMoveType(double angle) {
+        if (angle >= 279 && angle <= 300) return "Red_Single)";
+        if (angle >= 94 && angle <= 116) return "Red_Double";
+        if ((angle >= 340 && angle <= 360) || (angle >= 0 && angle <= 6)) return "Green_Single";
+        if (angle >= 156 && angle <= 184) return "Green_Double";
+        if (angle >= 226 && angle <= 249) return "Blue_Single";
+        if (angle >= 45 && angle <= 68) return "Blue_Double";
+        if (angle >= 69 && angle <= 93) return "Yellow_Single";
+        if (angle >= 250 && angle <= 278) return "Yellow_Double";
+        if (angle >= 185 && angle <= 214) return "Orange_Single";
+        if (angle >= 7 && angle <= 33) return "Orange_Double";
+        if (angle >= 117 && angle <= 143) return "Purple_Single";
+        if (angle >= 301 && angle <= 328) return "Purple_Double";
+        if (angle >= 34 && angle <= 44) return "Pink_1_Peppermint";
+        if (angle >= 144 && angle <= 155) return "Pink_2_Cupcake";
+        if (angle >= 215 && angle <= 225) return "Pink_3_GingerBread";
+        if (angle >= 329 && angle <= 339) return "Pink_4_Candy";
+
+        return "Unknown";
     }
 
+    private void moveToNextSpace(Players player, String moveType) {
+        Node currentSpace = player.getCurrentSpace();
+        Node targetSpace = currentSpace;
 
+        switch (moveType) {
+            case "Red_Single":
+                targetSpace = currentSpace.moveForward(currentSpace, "Red");
+                break;
+            case "Red_Double":
+                targetSpace = currentSpace.moveForward(currentSpace, "Red");
+                if (targetSpace != null) targetSpace = targetSpace.moveForward(targetSpace, "Red");
+                break;
+            case "Green_Single":
+                targetSpace = currentSpace.moveForward(currentSpace,"Green");
+                break;
+            case "Green_Double":
+                targetSpace = currentSpace.moveForward(currentSpace,"Green");
+                if (targetSpace != null) targetSpace = targetSpace.moveForward(targetSpace, "Green");
+                break;
+            case "Blue_Single":
+                targetSpace = currentSpace.moveForward(currentSpace,"Blue");
+                break;
+            case "Blue_Double":
+                targetSpace = currentSpace.moveForward(currentSpace,"Blue");
+                if (targetSpace != null) targetSpace = targetSpace.moveForward(targetSpace,"Blue");
+                break;
+            case "Yellow_Single":
+                targetSpace = currentSpace.moveForward(currentSpace,"Yellow");
+                break;
+            case "Yellow_Double":
+                targetSpace = currentSpace.moveForward(currentSpace,"Yellow");
+                if (targetSpace != null) targetSpace = targetSpace.moveForward(targetSpace,"Yellow");
+                break;
+            case "Orange_Single":
+                newSpace = currentSpace.moveForward(currentSpace,"Orange");
+                break;
+            case "Orange_Double":
+                newSpace = currentSpace.moveForward(currentSpace,"Orange");
+                if (newSpace != null) newSpace = newSpace.moveForward(newSpace, "Orange");
+                break;
+            case "Purple_Single":
+                newSpace = currentSpace.moveForward(currentSpace,"Purple");
+                break;
+            case "Purple_Double":
+                newSpace = currentSpace.moveForward(currentSpace,"Purple");
+                if (newSpace != null) newSpace = newSpace.moveForward(newSpace,"Purple");
+                break;
+            case "Pink_1_Peppermint":
+            case "Pink_2_Cupcake":
+            case "Pink_3_GingerBread":
+            case "Pink_4_Candy":
+                newSpace = currentSpace.moveForward(currentSpace,moveType.split("_")[1]);
+                break;
+        }
 
+    }
 
-    /** EVENT HANDLERS BELOW HERE
-    // 1. Event Handler for when player clicks "start game"
-        // next screen pops up
-    // 2. Event handler for when "enter players' information" pops up
-        // editable text boxes for entering name. player clicks a button after names are entered to start the game.
-        //those names will be written in a "player" class. 2 variables in constructor: player name & player number.
-    // 3. gameboard pops up, all players will begin @ the king (before the red)..set players = "pieces"?
-    // 4. player 1 clicks the spinner.
-        //after the spinner result, using dll, player moves based on the result...
+    private void movePlayer(Players player, String moveType) {
+        com.example.candyland.Node currentSpace = player.getCurrentSpace();
+        com.example.candyland.Node newSpace = currentSpace;
 
-     */
+        switch (moveType) {
+            case "Red_Single":
+            case "Red_Double":
+            case "Green_Single":
+            case "Green_Double":
+            case "Blue_Single":
+            case "Blue_Double":
+            case "Yellow_Single":
+            case "Yellow_Double":
+            case "Orange_Single":
+            case "Orange_Double":
+            case "Purple_Single":
+            case "Purple_Double":
+            case "Pink_1_Peppermint":
+            case "Pink_2_Cupcake":
+            case "Pink_3_GingerBread":
+            case "Pink_4_Candy":
+                moveToNextSpace(currentSpace, moveType);
+                break;
+        }
 
-    @FXML
-    private void gameBoard(ActionEvent e) { // game board
-        gameMoves = new DoublyLinkedList();
-        // players = new Players(); // need to add params
-        // spinner = new Spinner(); // need to add params
+        if (newSpace != null) {
+            player.setCurrentSpace(newSpace);
+            movePieceOnBoard(player,newSpace);
 
-    }; // third event. open the game board and add each player to it.
-    // player 1 clicks the spinner. after the spinner result, using dll,
-    // player moves based on the spinner result...
+            if (newSpace == gameMoves.getEnd()) {
+                player.setWinner(true);
+                System.out.println(player.getName() + " has won the game!");
+            }
+        }
+    }
+
+    private ImageView getPlayerPiece(int playerNumber) {
+        switch (playerNumber) {
+            case 1: return playerOnePiece;
+            case 2: return playerTwoPiece;
+            case 3: return playerThreePiece;
+            case 4: return playerFourPiece;
+            default: return null;
+        }
+    }
+
+    private void movePieceOnBoard(Players player, com.example.candyland.Node space) {
+        ImageView piece = getPlayerPiece(player.getPlayerNumber());
+
+        if (piece != null && targetSpace != null) {
+            animatePiece(piece,targetSpace.getX(),targetSpace.get());
+        }
+    }
+
+    private void animatePiece(ImageView piece, double targetX, double targetY) {
+        TranslateTransition transition = new TranslateTransition(Duration.seconds(2),piece);
+        transition.setToX(targetX);
+        transition.setToY(targetY);
+        transition.play();
+    }
+
 
 }

@@ -25,6 +25,9 @@ public class Players {
         return playerNumber;
     }
 
+    public com.example.candyland.Node getCurrentSpace() {
+        return currentSpace;
+    }
 //    public Piece getPiece() {
 //        return piece;
 //    }
@@ -38,6 +41,9 @@ public class Players {
     }
 
     // Mutators
+    public void setCurrentSpace(com.example.candyland.Node currentSpace) {
+        this.currentSpace = currentSpace;
+    }
     public void setName(String name) {
         this.name = name;
     }
