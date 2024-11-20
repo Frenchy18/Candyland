@@ -1,13 +1,13 @@
 package com.example.candyland;
 
 public class Piece {
-    private Node currentSpace; // The current space the piece is on
+    private Node currentSpace;
 
     // Constructor: Initialize the piece with its starting position
     public Piece(Node startingSpace) {
         this.currentSpace = startingSpace;
-    }
 
+    }
     // Get the current space of the piece
     public Node getCurrentSpace() {
         return currentSpace;

@@ -42,7 +42,7 @@ public class Node {
         return null;
     }
 
-    private int getSpaceNumber() {
+    public int getSpaceNumber() {
         return spaceNumber;
     }
 

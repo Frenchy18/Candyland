@@ -1,5 +1,6 @@
 package com.example.candyland;
 
+
 public class Players {
     public Node currentSpace;
     private String name;           // Name of the player
@@ -29,9 +30,9 @@ public class Players {
     public Node getCurrentSpace() {
         return currentSpace;
     }
-//    public Piece getPiece() {
-//        return piece;
-//    }
+    public Piece getPiece() {
+        return piece;
+    }
 
     public boolean isWinner() {
         return isWinner;

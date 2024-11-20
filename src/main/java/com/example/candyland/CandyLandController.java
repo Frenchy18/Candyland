@@ -31,10 +31,8 @@ public class CandyLandController {
     private int currentPlayerIndex = 0;
 
 
-    @FXML private ImageView playerOnePiece;
-    @FXML private ImageView playerTwoPiece;
-    @FXML private ImageView playerThreePiece;
-    @FXML private ImageView playerFourPiece;
+    @FXML private ImageView playerOnePiece, playerTwoPiece, playerThreePiece, playerFourPiece;
+
 
     @FXML
     public void initialize() {
@@ -67,12 +65,20 @@ public class CandyLandController {
         }
 
         System.out.println("Player " + player.getName() + " is at space: " + currentSpace.spaceNumber);
+        int moveCount = moveType.contains("Double") ? 2:1;
 
         com.example.candyland.Node targetSpace = currentSpace.moveForward(currentSpace, moveType);
-
+        for (int i=0; i < moveCount;i++) {
+            targetSpace = targetSpace.moveForward(targetSpace,moveType.split("_")[0]);
+            if (targetSpace == null) {
+                System.out.println("Error: No valid target space found for moveType: "+moveType);
+                return;
+            }
+        }
         if (targetSpace != null) {
             player.setCurrentSpace(targetSpace);
             movePieceOnBoard(player, targetSpace);
+            System.out.println(player.getName() + " moved to space: "+targetSpace.getSpaceNumber());
 
             if (targetSpace == gameMoves.getEnd()) {
                 player.setWinner(true);
@@ -166,6 +172,7 @@ public class CandyLandController {
         if (angle >= 215 && angle <= 225) return "Pink_3_GingerBread";
         if (angle >= 329 && angle <= 339) return "Pink_4_Candy";
 
+        System.out.println("Error: Invalid spinner angle: "+angle);
         return "Unknown";
     }
 
