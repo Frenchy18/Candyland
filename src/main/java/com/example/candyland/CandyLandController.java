@@ -24,15 +24,10 @@ import java.util.List;
 public class CandyLandController {
     // creating variable names
     private DoublyLinkedList gameMoves;
-    private Spinner spinner;
-    private Players players;
     private int currentTurn;
     private List<Players> playersList;
-    private int currentPlayerIndex = 0;
-
 
     @FXML private ImageView playerOnePiece, playerTwoPiece, playerThreePiece, playerFourPiece;
-
 
     @FXML
     public void initialize() {
@@ -58,36 +53,38 @@ public class CandyLandController {
 
     private void movePlayer(Players player, String moveType) {
         com.example.candyland.Node currentSpace = player.getCurrentSpace();
+        com.example.candyland.Node targetSpace = null;
 
         if (currentSpace == null) {
-            System.out.println("Error: " + player.getName() + " is not on the board (currentSpace is null).");
+            System.out.println("Error: Player " + player.getName() + " is not on the board (currentSpace is null).");
             return;
         }
 
-        System.out.println("Player " + player.getName() + " is at space: " + currentSpace.spaceNumber);
-        int moveCount = moveType.contains("Double") ? 2:1;
+        String[] moveParts = moveType.split("_");
+        String color = moveParts[0];
+        boolean isDouble = moveParts.length > 1 && moveParts[1].equalsIgnoreCase("Double");
 
-        com.example.candyland.Node targetSpace = currentSpace.moveForward(currentSpace, moveType);
-        for (int i=0; i < moveCount;i++) {
-            targetSpace = targetSpace.moveForward(targetSpace,moveType.split("_")[0]);
-            if (targetSpace == null) {
-                System.out.println("Error: No valid target space found for moveType: "+moveType);
-                return;
-            }
-        }
-        if (targetSpace != null) {
-            player.setCurrentSpace(targetSpace);
-            movePieceOnBoard(player, targetSpace);
-            System.out.println(player.getName() + " moved to space: "+targetSpace.getSpaceNumber());
-
-            if (targetSpace == gameMoves.getEnd()) {
-                player.setWinner(true);
-                System.out.println(player.getName() + " has won the game!");
+        // Traverse to the target space
+        if (isDouble) {
+            targetSpace = currentSpace.moveForward(currentSpace, color); // Move to the first square
+            if (targetSpace != null) {
+                targetSpace = targetSpace.moveForward(targetSpace, color); // Move to the second square
             }
         } else {
-            System.out.println("Error: No valid target space found for moveType: " + moveType);
+            targetSpace = currentSpace.moveForward(currentSpace, color); // Move to the first square only
         }
 
+        if (targetSpace == null) {
+            System.out.println("Error: No valid target space for moveType: " + moveType);
+            return;
+        }
+
+        // Update the player's current space and move the piece
+        player.setCurrentSpace(targetSpace);
+        movePieceOnBoard(player, targetSpace);
+
+        System.out.println("Player " + player.getName() + " moved to space: " + targetSpace.getSpaceNumber() +
+                " (" + targetSpace.getColor() + ")");
     }
 
     private void movePieceOnBoard(Players player, com.example.candyland.Node targetSpace) {

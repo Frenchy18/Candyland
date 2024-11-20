@@ -29,38 +29,21 @@ public class Node {
      * @return the current node after traversing forwards on the list
      */
     public Node moveForward(Node currentSpace, String color) {
-        Node current = currentSpace;
+        Node current = currentSpace.next; // Start with the next node
         while (current != null) {
-            System.out.println("Traversing: Current Node: "+current.getSpaceNumber());
-            if (current.color.equals(color)) {
-                System.out.println("Found target node: "+current.getSpaceNumber());
-                return current;
+            System.out.println("Traversing Node: " + current.spaceNumber + " with color: " + current.color);
+            if (current.color.equalsIgnoreCase(color)) {
+                System.out.println("Found target node: " + current.spaceNumber + " (" + current.color + ")");
+                return current; // Found the next node of the specified color
             }
-            current = current.next;
+            current = current.next; // Continue traversing
         }
-        System.out.println("No matching node found for color: "+color);
-        return null;
+        System.out.println("No matching node found for color: " + color);
+        return null; // No matching node found
     }
 
     public int getSpaceNumber() {
         return spaceNumber;
-    }
-
-    /**
-     * Method moves the player backwards
-     * @param currentSpace
-     * @param spaceColor
-     * @return the current node that is stopped on after traversal
-     */
-    public Node moveBackwards(Node currentSpace, String spaceColor){
-        Node current = currentSpace;
-        do {
-            current = current.prev;
-        } while (current != null && !current.color.equals(spaceColor));{
-            current = current.prev;
-        }
-        return current;
-
     }
 
     public double getX() {
@@ -71,5 +54,7 @@ public class Node {
         return y;
     }
 
-
+    public String getColor() {
+        return color;
+    }
 }
