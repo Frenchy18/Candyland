@@ -8,64 +8,46 @@
  */
 package com.example.candyland;
 import java.util.Random;
+import javafx.animation.RotateTransition;
+import javafx.scene.image.ImageView;
+import javafx.util.Duration;
+
 /**
  * Allows for creation of spinner object for given player pieces, allowing for traversal through doublylinkedlist
  * to simulate candyland board and movement of individual players throughout the game
  */
 public class Spinner {
-    private Players piece1;
-    private Players piece2;
-    private Players piece3;
-    private Players piece4;
-    /**
-     * Constructs spinner object for 2 players
-     * @param piece1 the piece of player 1
-     * @param piece2 the piece of player 2
-     */
-    Spinner (Players piece1, Players piece2) {
-        this.piece1 = piece1;
-        this.piece2 = piece2;
+    private ImageView candyCaneSpinner; // ImageView reference for spinner
+    private final Random random = new Random();
+    // constructor for Spinner object
+    public Spinner (ImageView candyCaneSpinner) {
+        this.candyCaneSpinner = candyCaneSpinner;
     }
-    /**
-     * Constructs spinner object for 3 players
-     * @param piece1 the piece of player 1
-     * @param piece2 the piece of player 2
-     * @param piece3 the piece of player 3
-     */
-    Spinner (Players piece1, Players piece2, Players piece3) {
-        this.piece1 = piece1;
-        this.piece2 = piece2;
-        this.piece3 = piece3;
-    }
-    /**
-     * Constructs spinner object for 4 players
-     * @param piece1 the piece of player 1
-     * @param piece2 the piece of player 2
-     * @param piece3 the piece of player 3
-     * @param piece4 the piece of player 4
-     */
-    Spinner (Players piece1, Players piece2, Players piece3, Players piece4) {
-        this.piece1 = piece1;
-        this.piece2 = piece2;
-        this.piece3 = piece3;
-        this.piece4 = piece4;
-    }
+
     /**
      * Spins once to get result for player piece movement
      * @return randomSpin.nextInt(numOptions) the random result of the spin from 0-15 for use in piece movement
      */
-    public int spin() {
-        Random randomSpin = new Random();
-        int numOptions = 16;
-        return randomSpin.nextInt(numOptions);
+    public void spin(Players currentPlayer) {
+        // Generate a random spin between 720 and 1440 degrees
+        int randomSpinDegrees = 720 + random.nextInt(720);
+
+        RotateTransition rotateTransition = new RotateTransition(Duration.seconds(5), candyCaneSpinner);
+        rotateTransition.setByAngle(randomSpinDegrees);
+        rotateTransition.setCycleCount(2);
+        rotateTransition.setOnFinished(event -> {
+            movePiece(currentPlayer);  // Move current player based on the spin result
+        });
+        rotateTransition.play();
     }
+
     /**
      * Gets random result using spin method which dictates movement of piece
      * across the board/doublylinkedlist using switches for each possible spin result
      * @param piece the particular player being moved during player's turn
      */
     public void movePiece(Players piece) {
-        int resultNum = spin();
+        int resultNum = random.nextInt(16); // Random numbers from 0-16 representing slots on Spinner
         switch (resultNum) {
             case 0: // red
                 piece.currentSpace = piece.currentSpace.moveForward(piece.currentSpace, "Red");
@@ -129,4 +111,13 @@ public class Spinner {
                 break;
         }
     }
+
+    private Node doubleMove(Players piece, String color) {
+        Node current = piece.currentSpace;
+        for (int numTimes = 0; numTimes < 2; numTimes++) {
+            current = current.moveForward(current, color);
+        }
+        return current;
+    }
 }
+
