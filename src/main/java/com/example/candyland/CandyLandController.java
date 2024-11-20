@@ -164,10 +164,10 @@ public class CandyLandController {
         if (angle >= 7 && angle <= 33) return "Orange_Double";
         if (angle >= 117 && angle <= 143) return "Purple_Single";
         if (angle >= 301 && angle <= 328) return "Purple_Double";
-        if (angle >= 34 && angle <= 44) return "Pink_1_Peppermint";
-        if (angle >= 144 && angle <= 155) return "Pink_2_Cupcake";
-        if (angle >= 215 && angle <= 225) return "Pink_3_GingerBread";
-        if (angle >= 329 && angle <= 339) return "Pink_4_Candy";
+        if (angle >= 34 && angle <= 44) return "Pink1_Peppermint";
+        if (angle >= 144 && angle <= 155) return "Pink2_Cupcake";
+        if (angle >= 215 && angle <= 225) return "Pink3_GingerBread";
+        if (angle >= 329 && angle <= 339) return "Pink4_Candy";
 
         System.out.println("Error: Invalid spinner angle: "+angle);
         return "Unknown";
