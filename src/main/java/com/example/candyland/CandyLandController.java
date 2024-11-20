@@ -331,9 +331,4 @@ public class CandyLandController {
         }
     }
 
-    // ending the game
-    @FXML
-    protected void buttonEndGame() {
-        System.exit(0);
-    }
 }
