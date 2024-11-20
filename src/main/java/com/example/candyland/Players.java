@@ -13,6 +13,7 @@ public class Players {
         this.playerNumber = playerNumber;
         this.piece = new Piece(startingSpace);
         this.isWinner = false;
+        this.currentSpace = startingSpace;
         this.totalMoves = 0;
     }
 

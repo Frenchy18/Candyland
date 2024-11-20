@@ -41,33 +41,35 @@ public class CandyLandController {
         gameMoves = new DoublyLinkedList();
         gameMoves.initializeBoard();
 
-        System.out.println("Board Created.");
     }
 
     private void setNumPlayers(int numPlayers) {
-        playersList = new ArrayList<>();
-        com.example.candyland.Node startNode = gameMoves.getStart();
-
-        if (startNode == null) {
-            System.out.println("Error: Start node is null");
+        if (gameMoves.getStart() == null) {
+            System.out.println("Error: The board's starting node is null");
             return;
         }
+        playersList = new ArrayList<>();
+        com.example.candyland.Node startNode = gameMoves.getStart();
 
         for (int i = 0; i < numPlayers; i++) {
             Players player = new Players("Player "+(i+1), i+1,startNode);
             playersList.add(player);
+            System.out.println("Player " + (i+1) + " assigned to space: " + startNode.spaceNumber);
         }
-
     }
 
     private void movePlayer(Players player, String moveType) {
         com.example.candyland.Node currentSpace = player.getCurrentSpace();
+
         if (currentSpace == null) {
-            System.out.println("Error: Player is not on the board");
+            System.out.println("Error: " + player.getName() + " is not on the board (currentSpace is null).");
             return;
         }
 
+        System.out.println("Player " + player.getName() + " is at space: " + currentSpace.spaceNumber);
+
         com.example.candyland.Node targetSpace = currentSpace.moveForward(currentSpace, moveType);
+
         if (targetSpace != null) {
             player.setCurrentSpace(targetSpace);
             movePieceOnBoard(player, targetSpace);
@@ -76,9 +78,8 @@ public class CandyLandController {
                 player.setWinner(true);
                 System.out.println(player.getName() + " has won the game!");
             }
-
-        }else {
-            System.out.println("Error: No valid target space found for moveType " + moveType);
+        } else {
+            System.out.println("Error: No valid target space found for moveType: " + moveType);
         }
 
     }
@@ -89,9 +90,6 @@ public class CandyLandController {
         if (playerPiece != null && targetSpace != null) {
             double targetX = targetSpace.getX();
             double targetY = targetSpace.getY();
-            targetX += (Math.random() *4) -2;
-            targetY += (Math.random() *4) -2;
-            System.out.println(targetX+","+targetY);
 
             TranslateTransition transition = new TranslateTransition(Duration.seconds(2),playerPiece);
             transition.setToX(targetX - playerPiece.getLayoutX());

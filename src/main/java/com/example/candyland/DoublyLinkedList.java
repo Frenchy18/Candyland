@@ -90,6 +90,11 @@ public class DoublyLinkedList {
                 {1139, 313}, // Purple_10
                 {1164, 363} // GameEndSquare
         };
+
+        if (coordinates.length == 0) {
+            System.out.println("Error: Coordinates array is empty.");
+            return;
+        }
         head = new Node(0,"Rainbow", 0, "Start",coordinates[0][0]-Math.random()*2-20,coordinates[0][1]-60);
         Node current = head;
 
@@ -105,6 +110,12 @@ public class DoublyLinkedList {
         }
 
         tail = current;
+
+        Node temp = head;
+        while (temp != null) {
+            System.out.println("Node: "+temp.spaceNumber + ": {"+temp.getX()+", "+temp.getY() + ")");
+            temp = temp.next;
+        }
     }
 
     private String getColorForSpace(int spaceNumber) {
