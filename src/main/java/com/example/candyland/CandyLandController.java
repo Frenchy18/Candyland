@@ -75,10 +75,13 @@ public class CandyLandController {
             targetSpace = currentSpace.moveForward(currentSpace, color); // Move to the first square only
         }
 
-        if (targetSpace == null) {
+        if (targetSpace == null && currentSpace.spaceNumber >= 60) {
             targetSpace = currentSpace.moveForward(currentSpace,"End");
             System.out.println("Player "+ (currentTurn) +" You won!");
             playerTurnLabel.setText("Player " + (currentTurn) + ", you won!");
+            System.exit(0);
+        } else if (targetSpace == null) {
+            System.out.println("Error: Null exception");
         }
 
         // Update the player's current space and move the piece
