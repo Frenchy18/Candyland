@@ -16,6 +16,7 @@ public class Players {
         this.piece = new Piece(startingSpace);
         this.isWinner = false;
         this.totalMoves = 0;
+        this.currentSpace = startingSpace;
     }
 
     // Accessors
