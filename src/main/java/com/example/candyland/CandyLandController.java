@@ -14,6 +14,10 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 import java.io.IOException;
+import javafx.animation.RotateTransition;
+import javafx.animation.Interpolator;
+import javafx.scene.effect.MotionBlur;
+import javafx.util.Duration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,13 +27,6 @@ public class CandyLandController {
     private DoublyLinkedList gameMoves;
     private Spinner spinner;
     private Players players;
-
-    // start menu fx:id's:
-    @FXML private Button buttonStartGame; // Menu screen start
-    @FXML private Button buttonEndGame; // Menu screen exit
-    @FXML private Button buttonTwoPlayer; // Two player button
-    @FXML private Button buttonThreePlayer; // Three player button
-    @FXML private Button buttonFourPlayer; // Four player button
 
     @FXML private ImageView playerOnePiece;
     @FXML private ImageView playerTwoPiece;
@@ -58,6 +55,10 @@ public class CandyLandController {
         // get the current stage and close it
         Stage stage = (Stage) ((Node) exit.getSource()).getScene().getWindow();
         stage.close();
+    }
+    @FXML
+    private void exitGameButton() {
+        System.exit(0);
     }
 
     @FXML
@@ -100,78 +101,43 @@ public class CandyLandController {
         }
     }
 
-
-    // Game board fx:id's
-    @FXML private ImageView GameStartSquare; // where each player will start
-    @FXML private ImageView Red_1;
-    @FXML private ImageView Green_1;
-    @FXML private ImageView Blue_1;
-    @FXML private ImageView Yellow_1;
-    @FXML private ImageView Orange_1;
-    @FXML private ImageView Purple_1;
-    @FXML private ImageView Red_2;
-    @FXML private ImageView Green_2;
-    @FXML private ImageView Blue_2;
-    @FXML private ImageView Yellow_2;
-    @FXML private ImageView Orange_2;
-    @FXML private ImageView Purple_2;
-    @FXML private ImageView Red_3;
-    @FXML private ImageView Green_3;
-    @FXML private ImageView Blue_3;
-    @FXML private ImageView Yellow_3;
-    @FXML private ImageView Orange_3;
-    @FXML private ImageView Purple_3;
-    @FXML private ImageView Red_4;
-    @FXML private ImageView Green_4;
-    @FXML private ImageView Blue_4;
-    @FXML private ImageView Yellow_4;
-    @FXML private ImageView Orange_4;
-    @FXML private ImageView Purple_4;
-    @FXML private ImageView Red_5;
-    @FXML private ImageView Green_5;
-    @FXML private ImageView Blue_5;
-    @FXML private ImageView Yellow_5;
-    @FXML private ImageView Orange_5;
-    @FXML private ImageView Purple_5;
-    @FXML private ImageView Red_6;
-    @FXML private ImageView Green_6;
-    @FXML private ImageView Blue_6;
-    @FXML private ImageView Yellow_6;
-    @FXML private ImageView Orange_6;
-    @FXML private ImageView Purple_6;
-    @FXML private ImageView Red_7;
-    @FXML private ImageView Green_7;
-    @FXML private ImageView Blue_7;
-    @FXML private ImageView Yellow_7;
-    @FXML private ImageView Orange_7;
-    @FXML private ImageView Purple_7;
-    @FXML private ImageView Red_8;
-    @FXML private ImageView Green_8;
-    @FXML private ImageView Blue_8;
-    @FXML private ImageView Yellow_8;
-    @FXML private ImageView Orange_8;
-    @FXML private ImageView Purple_8;
-    @FXML private ImageView Red_9;
-    @FXML private ImageView Green_9;
-    @FXML private ImageView Blue_9;
-    @FXML private ImageView Yellow_9;
-    @FXML private ImageView Orange_9;
-    @FXML private ImageView Purple_9;
-    @FXML private ImageView Red_10;
-    @FXML private ImageView Green_10;
-    @FXML private ImageView Blue_10;
-    @FXML private ImageView Yellow_10;
-    @FXML private ImageView Orange_10;
-    @FXML private ImageView Purple_10;
-    @FXML private ImageView GameEndSquare;
-    @FXML private ImageView Pink_3_Gingerbread;
-    @FXML private ImageView Pink_1_Peppermint;
-    @FXML private ImageView Pink_2_Cupcake;
-    @FXML private ImageView Pink_4_Candy;
     @FXML private ImageView Spinner_Spinner;
-    @FXML private Button activateSpinnerButton;
-    @FXML private Button exitGameButton;
-    @FXML private Label playerTurnLabel;
+    @FXML
+    private void spinTheWheel(ActionEvent event) {
+        RotateTransition rotateTransition = new RotateTransition(Duration.seconds(2),Spinner_Spinner);
+        rotateTransition.setByAngle(1080);
+        rotateTransition.setInterpolator(Interpolator.EASE_OUT);
+        rotateTransition.setCycleCount(1);
+
+        MotionBlur motionBlur = new MotionBlur();
+        Spinner_Spinner.setEffect(motionBlur);
+
+        rotateTransition.setOnFinished(e -> {
+            Spinner_Spinner.setEffect(null);
+
+            double randomAngle = Math.random() * 360;
+            RotateTransition slowTransition = new RotateTransition(Duration.seconds(1),Spinner_Spinner);
+            slowTransition.setToAngle(randomAngle);
+            slowTransition.setInterpolator(Interpolator.EASE_OUT);
+            slowTransition.setCycleCount(1);
+            slowTransition.setOnFinished(ev -> {
+                int result = calculateSpinnerNumber(randomAngle);
+                System.out.println("Spinner result: "+result);
+            });
+            slowTransition.play();
+        });
+
+        rotateTransition.play();
+    }
+
+    private int calculateSpinnerNumber(double angle) {
+        int numSegments = 16;
+        double segmentSize = 360.0 / numSegments;
+
+        return (int) (angle / segmentSize);
+    }
+
+
 
 
     /** EVENT HANDLERS BELOW HERE
@@ -185,20 +151,6 @@ public class CandyLandController {
         //after the spinner result, using dll, player moves based on the result...
 
      */
-
-    @FXML
-    private void calculateButtonPressed(ActionEvent event) {
-         }; // this code will open and display the next fxml file
-
-    @FXML
-    private void enterPlayers(ActionEvent e) { // EH #2
-    }; // this code will use the fx:id's of each player's text field
-    // and plug that into the "players" class
-    // use the player1(2,3,etc)TextField's getText method to get the player names/numbers
-    // then pass those strings to Players constructor.
-    // call method selectAll to select the TextField’s text, then
-    // call requestFocus to give the TextField the focus. Now the user can immediately type a value in
-    // the amountTextField without having to first select its text.
 
     @FXML
     private void gameBoard(ActionEvent e) { // game board
