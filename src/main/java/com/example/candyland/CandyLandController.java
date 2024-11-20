@@ -1,15 +1,12 @@
 package com.example.candyland;
 
 // importing all classes from Candyland package
-import com.example.candyland.*;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 // fix this
 import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.scene.Node;
@@ -19,7 +16,6 @@ import javafx.animation.Interpolator;
 import javafx.scene.effect.MotionBlur;
 import javafx.animation.TranslateTransition;
 import javafx.util.Duration;
-import org.controlsfx.control.tableview2.filter.filtereditor.SouthFilter;
 
 
 import java.util.ArrayList;
@@ -151,7 +147,6 @@ public class CandyLandController {
                 movePlayer(currentPlayer,moveType);
 
                 currentTurn = (currentTurn+1) % playersList.size();
-
             });
             slowTransition.play();
         });
@@ -181,96 +176,37 @@ public class CandyLandController {
         return "Unknown";
     }
 
-    private void moveToNextSpace(Players player, String moveType) {
-        Node currentSpace = player.getCurrentSpace();
-        Node targetSpace = currentSpace;
+    private void movePlayer(Players player, String moveType) {
+        com.example.candyland.Node currentSpace = player.getCurrentSpace();
+        com.example.candyland.Node targetSpace = currentSpace;
 
-        switch (moveType) {
-            case "Red_Single":
-                targetSpace = currentSpace.moveForward(currentSpace, "Red");
-                break;
-            case "Red_Double":
-                targetSpace = currentSpace.moveForward(currentSpace, "Red");
-                if (targetSpace != null) targetSpace = targetSpace.moveForward(targetSpace, "Red");
-                break;
-            case "Green_Single":
-                targetSpace = currentSpace.moveForward(currentSpace,"Green");
-                break;
-            case "Green_Double":
-                targetSpace = currentSpace.moveForward(currentSpace,"Green");
-                if (targetSpace != null) targetSpace = targetSpace.moveForward(targetSpace, "Green");
-                break;
-            case "Blue_Single":
-                targetSpace = currentSpace.moveForward(currentSpace,"Blue");
-                break;
-            case "Blue_Double":
-                targetSpace = currentSpace.moveForward(currentSpace,"Blue");
-                if (targetSpace != null) targetSpace = targetSpace.moveForward(targetSpace,"Blue");
-                break;
-            case "Yellow_Single":
-                targetSpace = currentSpace.moveForward(currentSpace,"Yellow");
-                break;
-            case "Yellow_Double":
-                targetSpace = currentSpace.moveForward(currentSpace,"Yellow");
-                if (targetSpace != null) targetSpace = targetSpace.moveForward(targetSpace,"Yellow");
-                break;
-            case "Orange_Single":
-                newSpace = currentSpace.moveForward(currentSpace,"Orange");
-                break;
-            case "Orange_Double":
-                newSpace = currentSpace.moveForward(currentSpace,"Orange");
-                if (newSpace != null) newSpace = newSpace.moveForward(newSpace, "Orange");
-                break;
-            case "Purple_Single":
-                newSpace = currentSpace.moveForward(currentSpace,"Purple");
-                break;
-            case "Purple_Double":
-                newSpace = currentSpace.moveForward(currentSpace,"Purple");
-                if (newSpace != null) newSpace = newSpace.moveForward(newSpace,"Purple");
-                break;
-            case "Pink_1_Peppermint":
-            case "Pink_2_Cupcake":
-            case "Pink_3_GingerBread":
-            case "Pink_4_Candy":
-                newSpace = currentSpace.moveForward(currentSpace,moveType.split("_")[1]);
-                break;
+        Players currentPlayer = playersList.get(currentTurn);
+        com.example.candyland.Node newSpace = currentPlayer.getCurrentSpace().moveForward(currentPlayer.getCurrentSpace(),moveType);
+
+        if (targetSpace != null) {
+            player.setCurrentSpace(targetSpace);
+            movePieceOnBoard(player, targetSpace);
+
+            if (targetSpace == gameMoves.getEnd()) {
+                player.setWinner(true);
+                System.out.println(player.getName() + " has won the game!");
+            }
         }
 
     }
 
-    private void movePlayer(Players player, String moveType) {
-        com.example.candyland.Node currentSpace = player.getCurrentSpace();
-        com.example.candyland.Node newSpace = currentSpace;
+    private void movePieceOnBoard(Players player, com.example.candyland.Node targetSpace) {
+        ImageView playerPiece = getPlayerPiece(player.getPlayerNumber());
 
-        switch (moveType) {
-            case "Red_Single":
-            case "Red_Double":
-            case "Green_Single":
-            case "Green_Double":
-            case "Blue_Single":
-            case "Blue_Double":
-            case "Yellow_Single":
-            case "Yellow_Double":
-            case "Orange_Single":
-            case "Orange_Double":
-            case "Purple_Single":
-            case "Purple_Double":
-            case "Pink_1_Peppermint":
-            case "Pink_2_Cupcake":
-            case "Pink_3_GingerBread":
-            case "Pink_4_Candy":
-                moveToNextSpace(currentSpace, moveType);
-                break;
-        }
-
-        if (newSpace != null) {
-            player.setCurrentSpace(newSpace);
-            movePieceOnBoard(player,newSpace);
-
-            if (newSpace == gameMoves.getEnd()) {
-                player.setWinner(true);
-                System.out.println(player.getName() + " has won the game!");
-            }
+        if (playerPiece != null && targetSpace != null) {
+            double targetX = targetSpace.getX();
+            double targetY = targetSpace.getY();
+            TranslateTransition transition = new TranslateTransition(Duration.seconds(2),playerPiece);
+            transition.setToX(targetX - playerPiece.getLayoutX());
+            transition.setToY(targetY - playerPiece.getLayoutY());
+            transition.play();
+        } else {
+            System.out.println("Error: Player piece or target space is null");
         }
     }
 
@@ -283,21 +219,4 @@ public class CandyLandController {
             default: return null;
         }
     }
-
-    private void movePieceOnBoard(Players player, com.example.candyland.Node space) {
-        ImageView piece = getPlayerPiece(player.getPlayerNumber());
-
-        if (piece != null && targetSpace != null) {
-            animatePiece(piece,targetSpace.getX(),targetSpace.get());
-        }
-    }
-
-    private void animatePiece(ImageView piece, double targetX, double targetY) {
-        TranslateTransition transition = new TranslateTransition(Duration.seconds(2),piece);
-        transition.setToX(targetX);
-        transition.setToY(targetY);
-        transition.play();
-    }
-
-
 }

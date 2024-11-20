@@ -12,11 +12,13 @@ public class Node {
     private double x;
     private double y;
 
-    public Node(int spaceNumber, String color, int event, String eventMessage) {
+    public Node(int spaceNumber, String color, int event, String eventMessage, double x, double y) {
         this.event = event;
         this.eventMessage = eventMessage;
         this.color = color;
         this.spaceNumber = spaceNumber;
+        this.x = x;
+        this.y = y;
         this.prev = null;
         this.next = null;
     }
