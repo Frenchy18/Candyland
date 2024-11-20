@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 // fix this
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
@@ -16,13 +17,18 @@ import javafx.stage.Stage;
 import javafx.scene.Node;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import javafx.animation.RotateTransition;
+import javafx.util.Duration;
+import java.util.Random;
 
 public class CandyLandController {
     // creating variable names
-    private DoublyLinkedList gameMoves;
     private Spinner spinner;
-    private Players players;
+
+
 
     // start menu fx:id's:
     @FXML private Button buttonStartGame; // Menu screen start
@@ -33,7 +39,9 @@ public class CandyLandController {
         try {
             // load the game screen
             FXMLLoader loader = new FXMLLoader(getClass().getResource("CandyLand_PlayerScreen.fxml"));
+            System.out.println();
             Scene scene = new Scene(loader.load());
+            System.out.println();
 
             // get the current stage
             Stage stage = (Stage) ((Node) start.getSource()).getScene().getWindow();
@@ -51,14 +59,70 @@ public class CandyLandController {
         stage.close();
     }
 
+
     @FXML private Button buttonTwoPlayers;
+    @FXML void setButtonTwoPlayers(ActionEvent start) {
+        try {
+            // load the game screen
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("CandyLand_Game.fxml"));
+            Scene scene = new Scene(loader.load());
+
+            // get the current stage
+            Stage stage = (Stage) ((Node) start.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     @FXML private Button buttonThreePlayers;
+    @FXML void setButtonThreePlayers(ActionEvent start) {
+        try {
+            // load the game screen
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("CandyLand_Game.fxml"));
+            Scene scene = new Scene(loader.load());
+
+            // get the current stage
+            Stage stage = (Stage) ((Node) start.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     @FXML private Button buttonFourPlayers;
-    @FXML private AnchorPane buttonGoBack;
+    @FXML void setButtonFourPlayers(ActionEvent start) {
+        try {
+            // load the game screen
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("CandyLand_Game.fxml"));
+            Scene scene = new Scene(loader.load());
 
+            // get the current stage
+            Stage stage = (Stage) ((Node) start.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    // Player chooses to go back from PlayerScreen
+    @FXML private Button playerBackButton;
+    @FXML void setPlayerBackButton(ActionEvent back){
+        try {
+            // load the game screen
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Candyland_Menu.fxml"));
+            Scene scene = new Scene(loader.load());
 
-
-
+            // get the current stage
+            Stage stage = (Stage) ((Node) back.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     // Game board fx:id's
     @FXML private ImageView GameStartSquare; // where each player will start
@@ -132,42 +196,140 @@ public class CandyLandController {
     @FXML private Button exitGameButton;
     @FXML private Label playerTurnLabel;
 
+    // SPINNER
+    @FXML private ImageView candyCaneSpinner;
+    @FXML private Button spinButton;
 
-    /** EVENT HANDLERS BELOW HERE
-    // 1. Event Handler for when player clicks "start game"
-        // next screen pops up
-    // 2. Event handler for when "enter players' information" pops up
-        // editable text boxes for entering name. player clicks a button after names are entered to start the game.
-        //those names will be written in a "player" class. 2 variables in constructor: player name & player number.
-    // 3. gameboard pops up, all players will begin @ the king (before the red)..set players = "pieces"?
-    // 4. player 1 clicks the spinner.
-        //after the spinner result, using dll, player moves based on the result...
 
-     */
+    // INITIALIZING THE PLAYERS
 
-    @FXML
-    private void calculateButtonPressed(ActionEvent event) {
-         }; // this code will open and display the next fxml file
+    @FXML private ImageView playerOnePiece;
+    @FXML private ImageView playerTwoPiece;
+    @FXML private ImageView playerThreePiece;
+    @FXML private ImageView playerFourPiece;
 
-    @FXML
-    private void enterPlayers(ActionEvent e) { // EH #2
-    }; // this code will use the fx:id's of each player's text field
-    // and plug that into the "players" class
-    // use the player1(2,3,etc)TextField's getText method to get the player names/numbers
-    // then pass those strings to Players constructor.
-    // call method selectAll to select the TextField’s text, then
-    // call requestFocus to give the TextField the focus. Now the user can immediately type a value in
-    // the amountTextField without having to first select its text.
+    // setting player variables
+    private Players player1;
+    private Players player2;
+    private Players player3;
+    private Players player4;
+    private Players currentPlayer; // Tracks the current player
+
+    private DoublyLinkedList gameMoves;
 
     @FXML
-    private void gameBoard(ActionEvent e) { // game board
+    public void initialize(){
         gameMoves = new DoublyLinkedList();
-        // players = new Players(); // need to add params
-        // spinner = new Spinner(); // need to add params
+        initializeGameBoard();
 
-    }; // third event. open the game board and add each player to it.
-    // player 1 clicks the spinner. after the spinner result, using dll,
-    // player moves based on the spinner result...
+        // Initializing players at the start position
+        player1 = new Players("Player 1", 1, gameMoves.findSpaceNumber(1), playerOnePiece);
+        player2 = new Players("Player 2", 2, gameMoves.findSpaceNumber(1), playerTwoPiece);
+        player3 = new Players("Player 3", 3, gameMoves.findSpaceNumber(1), playerThreePiece);
+        player4 = new Players("Player 4", 4, gameMoves.findSpaceNumber(1), playerFourPiece);
+
+        // Set the first player to start
+        currentPlayer = player1;
+
+        // initialize the Spinner with the ImageView candycane
+        spinner = new Spinner(candyCaneSpinner);
+    }
+
+    private void initializeGameBoard(){
+        // Adding each square to the DLL
+        gameMoves.append(1, "Start");
+        gameMoves.append(2, "Red");
+        gameMoves.append(3, "Green");
+        gameMoves.append(4, "Blue");
+        gameMoves.append(5, "Yellow");
+        gameMoves.append(6, "Orange");
+        gameMoves.append(7, "Purple");
+        gameMoves.append(8, "Red");
+        gameMoves.append(9, "Green");
+        gameMoves.append(10, "Blue");
+        gameMoves.append(11, "Yellow");
+        gameMoves.append(12, "Orange");
+        gameMoves.append(13, "Purple");
+        gameMoves.append(14, "Peppermint");
+        gameMoves.append(15, "Red");
+        gameMoves.append(16, "Green");
+        gameMoves.append(17, "Blue");
+        gameMoves.append(18, "Yellow");
+        gameMoves.append(19, "Orange");
+        gameMoves.append(20, "Purple");
+        gameMoves.append(21, "Red");
+        gameMoves.append(22, "Green");
+        gameMoves.append(23, "Blue");
+        gameMoves.append(24, "Yellow");
+        gameMoves.append(25, "Orange");
+        gameMoves.append(26, "Purple");
+        gameMoves.append(27, "Cupcake");
+        gameMoves.append(28, "Red");
+        gameMoves.append(29, "Green");
+        gameMoves.append(30, "Blue");
+        gameMoves.append(30, "Yellow");
+        gameMoves.append(32, "Orange");
+        gameMoves.append(33, "Purple");
+        gameMoves.append(34, "Red");
+        gameMoves.append(35, "Green");
+        gameMoves.append(36, "Blue");
+        gameMoves.append(37, "Yellow");
+        gameMoves.append(38, "Orange");
+        gameMoves.append(39, "Purple");
+        gameMoves.append(40, "Gingerbread Man");
+        gameMoves.append(41, "Red");
+        gameMoves.append(42, "Green");
+        gameMoves.append(43, "Blue");
+        gameMoves.append(44, "Yellow");
+        gameMoves.append(45, "Orange");
+        gameMoves.append(46, "Purple");
+        gameMoves.append(47, "Red");
+        gameMoves.append(48, "Green");
+        gameMoves.append(49, "Blue");
+        gameMoves.append(50, "Yellow");
+        gameMoves.append(51, "Orange");
+        gameMoves.append(52, "Purple");
+        gameMoves.append(53, "Lollipop");
+        gameMoves.append(54, "Red");
+        gameMoves.append(55, "Green");
+        gameMoves.append(56, "Blue");
+        gameMoves.append(57, "Yellow");
+        gameMoves.append(58, "Orange");
+        gameMoves.append(59, "Purple");
+        gameMoves.append(60, "Red");
+        gameMoves.append(61, "Green");
+        gameMoves.append(62, "Blue");
+        gameMoves.append(63, "Yellow");
+        gameMoves.append(64, "Orange");
+        gameMoves.append(65, "Purple");
+        gameMoves.append(66, "Final Square");
+
+    }
+    @FXML
+    private void spinButton(ActionEvent e) {
+        if (spinner != null && currentPlayer != null) {
+            spinner.spin(currentPlayer); // Spin to move to the current player
+            currentPlayer = getNextPlayer(); // Next player's turn
+        } else {
+            System.out.println("Spinner or current player is not initialized");
+        }
+        // Test String to indicate if click is registered
+        System.out.println("Spin button clicked!");
+
+    }
+
+    private Players getNextPlayer() {
+        // Cycle to the next player
+        if (currentPlayer == player1) {
+            return player2;
+        } else if (currentPlayer == player2) {
+            return player3;
+        } else if (currentPlayer == player3) {
+            return player4;
+        } else {
+            return player1; // Cycle back to player1 after player4
+        }
+    }
 
     // ending the game
     @FXML

@@ -1,5 +1,7 @@
 package com.example.candyland;
 
+import javafx.scene.image.ImageView;
+
 public class Players {
     public Node currentSpace;
     private String name;           // Name of the player
@@ -8,7 +10,7 @@ public class Players {
     private boolean isWinner;      // If any player has won
     private int totalMoves;        // Total moves to help keep track of rounds
 
-    public Players(String name, int playerNumber, Node startingSpace) {
+    public Players(String name, int playerNumber, Node startingSpace, ImageView pieceImageView) {
         this.name = name;
         this.playerNumber = playerNumber;
         this.piece = new Piece(startingSpace);
@@ -25,9 +27,9 @@ public class Players {
         return playerNumber;
     }
 
-//    public Piece getPiece() {
-//        return piece;
-//    }
+    public Piece getPiece() {
+        return piece;
+    }
 
     public boolean isWinner() {
         return isWinner;
@@ -46,13 +48,6 @@ public class Players {
         isWinner = winner;
     }
 
-    // Moving piece based on spinner result
-    public void movePiece(int spinnerResult) {
-        piece.move(spinnerResult);
-        totalMoves += spinnerResult;
-
-        System.out.println(name + " moved " + spinnerResult + " spaces.");
-    }
 
     // Check if the player has won
     public boolean checkWin(Node finalSpace) {
