@@ -34,7 +34,7 @@ public class DoublyLinkedList {
         Node yellow2 = new Node(10, "Yellow", 0, "Yellow Square", 516, 574);
         Node orange2 = new Node(11, "Orange", 0, "Orange Square", 566, 574);
         Node purple2 = new Node(12, "Purple", 0, "Purple Square", 615, 574);
-        Node pink1Peppermint = new Node(13, "Pink", 0, "Peppermint Square", 665, 574);
+        Node pink1Peppermint = new Node(13, "Pink1", 0, "Peppermint Square", 665, 574);
         Node red3 = new Node(14, "Red", 0, "Red Square", 714, 574);
         Node green3 = new Node(15, "Green", 0, "Green Square", 764, 574);
         Node blue3 = new Node(16, "Blue", 0, "Blue Square", 814, 574);
@@ -47,7 +47,7 @@ public class DoublyLinkedList {
         Node yellow4 = new Node(23, "Yellow", 0, "Yellow Square", 839, 424);
         Node orange4 = new Node(24, "Orange", 0, "Orange Square", 789, 424);
         Node purple4 = new Node(25, "Purple", 0, "Purple Square", 739, 424);
-        Node pink2Cupcake = new Node(26, "Pink", 0, "Cupcake Square", 689, 424);
+        Node pink2Cupcake = new Node(26, "Pink2", 0, "Cupcake Square", 689, 424);
         Node red5 = new Node(27, "Red", 0, "Red Square", 640, 424);
         Node green5 = new Node(28, "Green", 0, "Green Square", 591, 424);
         Node blue5 = new Node(29, "Blue", 0, "Blue Square", 541, 424);
@@ -60,7 +60,7 @@ public class DoublyLinkedList {
         Node yellow6 = new Node(36, "Yellow", 0, "Yellow Square", 191, 285);
         Node orange6 = new Node(37, "Orange", 0, "Orange Square", 141, 284);
         Node purple6 = new Node(38, "Purple", 0, "Purple Square", 91, 260);
-        Node pink3Gingerbread = new Node(39, "Pink", 0, "Gingerbread Square", 42, 237);
+        Node pink3Gingerbread = new Node(39, "Pink3", 0, "Gingerbread Square", 42, 237);
         Node red7 = new Node(40, "Red", 0, "Red Square", 41, 188);
         Node green7 = new Node(41, "Green", 0, "Green Square", 91, 163);
         Node blue7 = new Node(42, "Blue", 0, "Blue Square", 141, 163);
@@ -73,7 +73,7 @@ public class DoublyLinkedList {
         Node yellow8 = new Node(49, "Yellow", 0, "Yellow Square", 491, 113);
         Node orange8 = new Node(50, "Orange", 0, "Orange Square", 541, 88);
         Node purple8 = new Node(51, "Purple", 0, "Purple Square", 591, 63);
-        Node pink4Candy = new Node(52, "Pink", 0, "Candy Square", 640, 63);
+        Node pink4Candy = new Node(52, "Pink4", 0, "Candy Square", 640, 63);
         Node red9 = new Node(53, "Red", 0, "Red Square", 690, 38);
         Node green9 = new Node(54, "Green", 0, "Green Square", 739, 13);
         Node blue9 = new Node(55, "Blue", 0, "Blue Square", 789, 13);
@@ -88,74 +88,6 @@ public class DoublyLinkedList {
         Node purple10 = new Node(64, "Purple", 0, "Purple Square", 1139, 263);
         Node gameEnd = new Node(65, "End", 0, "Game End", 1164, 313);
 
-        double[][] coordinates = {
-                {66, 624}, // GameStartSquare
-                {116, 624}, // Red_1
-                {166, 624}, // Green_1
-                {216, 624}, // Blue_1
-                {266, 624}, // Yellow_1
-                {316, 624}, // Orange_1
-                {366, 624}, // Purple_1
-                {416, 624}, // Red_2
-                {466, 624}, // Green_2
-                {516, 624}, // Blue_2
-                {566, 624}, // Yellow_2
-                {615, 624}, // Orange_2
-                {665, 624}, // Purple_2
-                {714, 624}, // Pink_1_Peppermint
-                {764, 624}, // Red_3
-                {814, 624}, // Green_3
-                {864, 624}, // Blue_3
-                {914, 624}, // Yellow_3
-                {964, 624}, // Orange_3
-                {1014, 599}, // Purple_3
-                {989, 549}, // Red_4
-                {939, 524}, // Green_4
-                {889, 499}, // Blue_4
-                {839, 474}, // Yellow_4
-                {789, 474}, // Orange_4
-                {739, 474}, // Purple_4
-                {689, 474}, // Pink_2_Cupcake
-                {640, 474}, // Red_5
-                {591, 474}, // Green_5
-                {541, 474}, // Blue_5
-                {491, 474}, // Yellow_5
-                {441, 459}, // Orange_5
-                {391, 434}, // Purple_5
-                {341, 409}, // Red_6
-                {291, 384}, // Green_6
-                {241, 359}, // Blue_6
-                {191, 335}, // Yellow_6
-                {141, 334}, // Orange_6
-                {91, 310}, // Purple_6
-                {42, 287}, // Pink_3_Gingerbread
-                {41, 238}, // Red_7
-                {91, 213}, // Green_7
-                {141, 213}, // Blue_7
-                {191, 238}, // Yellow_7
-                {241, 238}, // Orange_7
-                {291, 213}, // Purple_7
-                {341, 188}, // Red_8
-                {391, 188}, // Green_8
-                {441, 163}, // Blue_8
-                {491, 163}, // Yellow_8
-                {541, 138}, // Orange_8
-                {591, 113}, // Purple_8
-                {640, 113}, // Pink_4_Candy
-                {690, 88}, // Red_9
-                {739, 63}, // Green_9
-                {789, 63}, // Blue_9
-                {839, 88}, // Yellow_9
-                {889, 88}, // Orange_9
-                {939, 88}, // Purple_9
-                {989, 113}, // Red_10
-                {1039, 138}, // Green_10
-                {1089, 163}, // Blue_10
-                {1089, 213}, // Yellow_10
-                {1114, 263}, // Orange_10
-                {1139, 313}, // Purple_10
-                {1164, 363} // GameEndSquare
-        };
 
         // Linking nodes into a doubly linked list
         gameStart.next = red1;
@@ -357,10 +289,6 @@ public class DoublyLinkedList {
         startNode = gameStart;
         endNode = gameEnd;
 
-        if (coordinates.length == 0) {
-            System.out.println("Error: Coordinates array is empty.");
-            return;
-        }
 
         Node temp = startNode;
         while (temp != null) {
