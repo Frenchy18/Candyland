@@ -10,6 +10,18 @@ public class DoublyLinkedList {
         this.tail = null;
         this.size = 65;
     }
+    // append method links squares to DLL
+    public void append(int spaceNumber, String spaceColor) {
+        Node newNode = new Node(spaceNumber, spaceColor);
+        if (head == null) {
+            head = tail = newNode;
+        } else {
+            tail.next = newNode;
+            newNode.prev = tail;
+            tail = newNode;
+        }
+        size++;
+    }
 
     /**
      * method will find the node/ space number
