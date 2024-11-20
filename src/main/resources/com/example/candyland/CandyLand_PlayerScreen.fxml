@@ -50,7 +50,7 @@
                   </AnchorPane>
               </items>
             </SplitPane>
-            <AnchorPane fx:id="buttonGoBack" layoutY="584.0" onMouseClicked="#goBack" prefHeight="136.0" prefWidth="164.0">
+            <AnchorPane fx:id="buttonGoBack" layoutY="584.0" prefHeight="136.0" prefWidth="164.0">
                <children>
                   <ImageView blendMode="MULTIPLY" fitHeight="140.0" fitWidth="200.0" layoutY="-7.0">
                      <image>
