@@ -25,7 +25,7 @@
                               <Image url="@../../../images/2_Player.png" />
                            </image>
                         </ImageView>
-                        <Button fx:id="buttonTwoPlayers" defaultButton="true" focusTraversable="false" layoutX="120.0" layoutY="35.0" mnemonicParsing="false" onAction="#twoPlayersSelected" text="2 Players" />
+                        <Button fx:id="buttonTwoPlayers" defaultButton="true" focusTraversable="false" layoutX="120.0" layoutY="35.0" mnemonicParsing="false" onAction="#setButtonTwoPlayers" text="2 Players" />
                      </children>
                   </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
@@ -35,7 +35,7 @@
                               <Image url="@../../../images/3_Player.png" />
                            </image>
                         </ImageView>
-                        <Button fx:id="buttonThreePlayers" layoutX="146.0" layoutY="35.0" mnemonicParsing="false" onAction="#threePlayersSelected" text="3 Players" />
+                        <Button fx:id="buttonThreePlayers" layoutX="146.0" layoutY="35.0" mnemonicParsing="false" onAction="#setButtonThreePlayers" text="3 Players" />
                      </children>
                   </AnchorPane>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
@@ -45,7 +45,7 @@
                               <Image url="@../../../images/4_player.png" />
                            </image>
                         </ImageView>
-                        <Button fx:id="buttonFourPlayers" layoutX="76.0" layoutY="42.0" mnemonicParsing="false" onAction="#fourPlayersSelected" text="4 Players" />
+                        <Button fx:id="buttonFourPlayers" layoutX="76.0" layoutY="42.0" mnemonicParsing="false" onAction="#setButtonFourPlayers" text="4 Players" />
                      </children>
                   </AnchorPane>
               </items>
