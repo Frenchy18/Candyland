@@ -1,18 +1,16 @@
 package com.example.candyland;
 
 
+import javafx.scene.image.ImageView;
+
 // add event variable
 public class Node {
-    int event;
-    String eventMessage;
     int spaceNumber;
     String spaceColor;
     Node prev;
     Node next;
 
-    public Node(int spaceNumber, String spaceColor, int event, String eventMessage) {
-        this.event = event;
-        this.eventMessage = eventMessage;
+    public Node(int spaceNumber, String spaceColor) {
         this.spaceColor = spaceColor;
         this.spaceNumber = spaceNumber;
         this.prev = null;
@@ -26,9 +24,7 @@ public class Node {
      */
     public Node moveForward(Node currentSpace, String spaceColor) {
         Node current = currentSpace;
-        do {
-            current = current.next;
-        } while (current != null && !current.spaceColor.equals(spaceColor));{
+        while (current != null && !current.spaceColor.equals(spaceColor)) {
             current = current.next;
         }
         return current;
@@ -40,16 +36,11 @@ public class Node {
      * @param spaceColor
      * @return the current node that is stopped on after traversal
      */
-    public Node moveBackwards(Node currentSpace, String spaceColor){
+    public Node moveBackwards(Node currentSpace, String spaceColor) {
         Node current = currentSpace;
-        do {
-            current = current.prev;
-        } while (current != null && !current.spaceColor.equals(spaceColor));{
+        while (current != null && !current.spaceColor.equals(spaceColor)) {
             current = current.prev;
         }
         return current;
-
     }
-
-
 }
