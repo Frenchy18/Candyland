@@ -31,12 +31,19 @@ public class Node {
     public Node moveForward(Node currentSpace, String color) {
         Node current = currentSpace;
         while (current != null) {
+            System.out.println("Traversing: Current Node: "+current.getSpaceNumber());
             if (current.color.equals(color)) {
+                System.out.println("Found target node: "+current.getSpaceNumber());
                 return current;
             }
             current = current.next;
         }
+        System.out.println("No matching node found for color: "+color);
         return null;
+    }
+
+    private int getSpaceNumber() {
+        return spaceNumber;
     }
 
     /**

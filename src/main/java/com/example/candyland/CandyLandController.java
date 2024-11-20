@@ -1,6 +1,6 @@
 package com.example.candyland;
 
-// importing all classes from Candyland package
+// importing all classes from Candy land package
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -28,6 +28,7 @@ public class CandyLandController {
     private Players players;
     private int currentTurn;
     private List<Players> playersList;
+    private int currentPlayerIndex = 0;
 
 
     @FXML private ImageView playerOnePiece;
@@ -35,9 +36,145 @@ public class CandyLandController {
     @FXML private ImageView playerThreePiece;
     @FXML private ImageView playerFourPiece;
 
+    @FXML
+    public void initialize() {
+        gameMoves = new DoublyLinkedList();
+        gameMoves.initializeBoard();
+
+        System.out.println("Board Created.");
+    }
+
+    private void setNumPlayers(int numPlayers) {
+        playersList = new ArrayList<>();
+        com.example.candyland.Node startNode = gameMoves.getStart();
+
+        if (startNode == null) {
+            System.out.println("Error: Start node is null");
+            return;
+        }
+
+        for (int i = 0; i < numPlayers; i++) {
+            Players player = new Players("Player "+(i+1), i+1,startNode);
+            playersList.add(player);
+        }
+
+    }
+
+    private void movePlayer(Players player, String moveType) {
+        com.example.candyland.Node currentSpace = player.getCurrentSpace();
+        if (currentSpace == null) {
+            System.out.println("Error: Player is not on the board");
+            return;
+        }
+
+        com.example.candyland.Node targetSpace = currentSpace.moveForward(currentSpace, moveType);
+        if (targetSpace != null) {
+            player.setCurrentSpace(targetSpace);
+            movePieceOnBoard(player, targetSpace);
+
+            if (targetSpace == gameMoves.getEnd()) {
+                player.setWinner(true);
+                System.out.println(player.getName() + " has won the game!");
+            }
+
+        }else {
+            System.out.println("Error: No valid target space found for moveType " + moveType);
+        }
+
+    }
+
+    private void movePieceOnBoard(Players player, com.example.candyland.Node targetSpace) {
+        ImageView playerPiece = getPlayerPiece(player.getPlayerNumber());
+
+        if (playerPiece != null && targetSpace != null) {
+            double targetX = targetSpace.getX();
+            double targetY = targetSpace.getY();
+            targetX += (Math.random() *4) -2;
+            targetY += (Math.random() *4) -2;
+            System.out.println(targetX+","+targetY);
+
+            TranslateTransition transition = new TranslateTransition(Duration.seconds(2),playerPiece);
+            transition.setToX(targetX - playerPiece.getLayoutX());
+            transition.setToY(targetY - playerPiece.getLayoutY());
+            transition.play();
+        } else {
+            System.out.println("Error: Player piece or target space is null");
+        }
+    }
+
+    private ImageView getPlayerPiece(int playerNumber) {
+        switch (playerNumber) {
+            case 1: return playerOnePiece;
+            case 2: return playerTwoPiece;
+            case 3: return playerThreePiece;
+            case 4: return playerFourPiece;
+            default: return null;
+        }
+    }
+
+    @FXML private ImageView Spinner_Spinner;
+    @FXML
+    private void spinTheWheel() {
+        if (playersList == null || playersList.isEmpty()) {
+            System.out.println("Error: playersList is empty");
+            return;
+        }
+        RotateTransition rotateTransition = new RotateTransition(Duration.seconds(2),Spinner_Spinner);
+        rotateTransition.setByAngle(1080);
+        rotateTransition.setInterpolator(Interpolator.EASE_OUT);
+        rotateTransition.setCycleCount(1);
+
+        MotionBlur motionBlur = new MotionBlur();
+        Spinner_Spinner.setEffect(motionBlur);
+
+        rotateTransition.setOnFinished(e -> {
+            Spinner_Spinner.setEffect(null);
+
+            double randomAngle = Math.random() * 360;
+            RotateTransition slowTransition = new RotateTransition(Duration.seconds(1),Spinner_Spinner);
+            slowTransition.setToAngle(randomAngle);
+            slowTransition.setInterpolator(Interpolator.EASE_OUT);
+            slowTransition.setCycleCount(1);
+            slowTransition.setOnFinished(ev -> {
+                String moveType = determineMoveType(randomAngle);
+                System.out.println("Spinner landed on: "+moveType);
+
+                Players currentPlayer = playersList.get(currentTurn);
+                movePlayer(currentPlayer,moveType);
+
+                currentTurn = (currentTurn+1) % playersList.size();
+            });
+            slowTransition.play();
+        });
+
+        rotateTransition.play();
+    }
+
+    private String determineMoveType(double angle) {
+        if (angle >= 279 && angle <= 300) return "Red_Single";
+        if (angle >= 94 && angle <= 116) return "Red_Double";
+        if ((angle >= 340 && angle <= 360) || (angle >= 0 && angle <= 6)) return "Green_Single";
+        if (angle >= 156 && angle <= 184) return "Green_Double";
+        if (angle >= 226 && angle <= 249) return "Blue_Single";
+        if (angle >= 45 && angle <= 68) return "Blue_Double";
+        if (angle >= 69 && angle <= 93) return "Yellow_Single";
+        if (angle >= 250 && angle <= 278) return "Yellow_Double";
+        if (angle >= 185 && angle <= 214) return "Orange_Single";
+        if (angle >= 7 && angle <= 33) return "Orange_Double";
+        if (angle >= 117 && angle <= 143) return "Purple_Single";
+        if (angle >= 301 && angle <= 328) return "Purple_Double";
+        if (angle >= 34 && angle <= 44) return "Pink_1_Peppermint";
+        if (angle >= 144 && angle <= 155) return "Pink_2_Cupcake";
+        if (angle >= 215 && angle <= 225) return "Pink_3_GingerBread";
+        if (angle >= 329 && angle <= 339) return "Pink_4_Candy";
+
+        return "Unknown";
+    }
 
     // event handlers for the start menu
     @FXML void buttonStartGame(ActionEvent start) {
+        gameMoves = new DoublyLinkedList();
+        gameMoves.initializeBoard();
         try {
             // load the game screen
             FXMLLoader loader = new FXMLLoader(getClass().getResource("CandyLand_PlayerScreen.fxml"));
@@ -97,126 +234,10 @@ public class CandyLandController {
         for (int i = 0; i < playerPieces.size(); i++) {
             ImageView piece = playerPieces.get(i);
             if (piece != null) {
-                piece.setVisible(i < numPlayers); // Show pieces for active players
+                piece.setVisible(i < numPlayers); // Showpieces for active players
             } else {
                 System.out.println("Warning: player piece " + (i + 1) + " is null!");
             }
-        }
-    }
-
-    private void setNumPlayers(int numPlayers) {
-        gameMoves = new DoublyLinkedList();
-        gameMoves.initializeBoard();
-        playersList = new ArrayList<>();
-        com.example.candyland.Node startNode = gameMoves.getStart();
-        for (int i = 0; i < numPlayers; i++) {
-            Players player = new Players("Player "+(i+1), i+1,startNode);
-            player.setCurrentSpace(startNode);
-            playersList.add(player);
-        }
-    }
-
-    @FXML private ImageView Spinner_Spinner;
-    @FXML
-    private void spinTheWheel(ActionEvent event) {
-        if (playersList == null || playersList.isEmpty()) {
-            System.out.println("Error: playersList is empty");
-            return;
-        }
-        RotateTransition rotateTransition = new RotateTransition(Duration.seconds(2),Spinner_Spinner);
-        rotateTransition.setByAngle(1080);
-        rotateTransition.setInterpolator(Interpolator.EASE_OUT);
-        rotateTransition.setCycleCount(1);
-
-        MotionBlur motionBlur = new MotionBlur();
-        Spinner_Spinner.setEffect(motionBlur);
-
-        rotateTransition.setOnFinished(e -> {
-            Spinner_Spinner.setEffect(null);
-
-            double randomAngle = Math.random() * 360;
-            RotateTransition slowTransition = new RotateTransition(Duration.seconds(1),Spinner_Spinner);
-            slowTransition.setToAngle(randomAngle);
-            slowTransition.setInterpolator(Interpolator.EASE_OUT);
-            slowTransition.setCycleCount(1);
-            slowTransition.setOnFinished(ev -> {
-                String moveType = determineMoveType(randomAngle);
-                System.out.println("Spinner landed on: "+moveType);
-
-                Players currentPlayer = playersList.get(currentTurn);
-                movePlayer(currentPlayer,moveType);
-
-                currentTurn = (currentTurn+1) % playersList.size();
-            });
-            slowTransition.play();
-        });
-
-        rotateTransition.play();
-    }
-
-
-    private String determineMoveType(double angle) {
-        if (angle >= 279 && angle <= 300) return "Red_Single)";
-        if (angle >= 94 && angle <= 116) return "Red_Double";
-        if ((angle >= 340 && angle <= 360) || (angle >= 0 && angle <= 6)) return "Green_Single";
-        if (angle >= 156 && angle <= 184) return "Green_Double";
-        if (angle >= 226 && angle <= 249) return "Blue_Single";
-        if (angle >= 45 && angle <= 68) return "Blue_Double";
-        if (angle >= 69 && angle <= 93) return "Yellow_Single";
-        if (angle >= 250 && angle <= 278) return "Yellow_Double";
-        if (angle >= 185 && angle <= 214) return "Orange_Single";
-        if (angle >= 7 && angle <= 33) return "Orange_Double";
-        if (angle >= 117 && angle <= 143) return "Purple_Single";
-        if (angle >= 301 && angle <= 328) return "Purple_Double";
-        if (angle >= 34 && angle <= 44) return "Pink_1_Peppermint";
-        if (angle >= 144 && angle <= 155) return "Pink_2_Cupcake";
-        if (angle >= 215 && angle <= 225) return "Pink_3_GingerBread";
-        if (angle >= 329 && angle <= 339) return "Pink_4_Candy";
-
-        return "Unknown";
-    }
-
-    private void movePlayer(Players player, String moveType) {
-        com.example.candyland.Node currentSpace = player.getCurrentSpace();
-        com.example.candyland.Node targetSpace = currentSpace;
-
-        Players currentPlayer = playersList.get(currentTurn);
-        com.example.candyland.Node newSpace = currentPlayer.getCurrentSpace().moveForward(currentPlayer.getCurrentSpace(),moveType);
-
-        if (targetSpace != null) {
-            player.setCurrentSpace(targetSpace);
-            movePieceOnBoard(player, targetSpace);
-
-            if (targetSpace == gameMoves.getEnd()) {
-                player.setWinner(true);
-                System.out.println(player.getName() + " has won the game!");
-            }
-        }
-
-    }
-
-    private void movePieceOnBoard(Players player, com.example.candyland.Node targetSpace) {
-        ImageView playerPiece = getPlayerPiece(player.getPlayerNumber());
-
-        if (playerPiece != null && targetSpace != null) {
-            double targetX = targetSpace.getX();
-            double targetY = targetSpace.getY();
-            TranslateTransition transition = new TranslateTransition(Duration.seconds(2),playerPiece);
-            transition.setToX(targetX - playerPiece.getLayoutX());
-            transition.setToY(targetY - playerPiece.getLayoutY());
-            transition.play();
-        } else {
-            System.out.println("Error: Player piece or target space is null");
-        }
-    }
-
-    private ImageView getPlayerPiece(int playerNumber) {
-        switch (playerNumber) {
-            case 1: return playerOnePiece;
-            case 2: return playerTwoPiece;
-            case 3: return playerThreePiece;
-            case 4: return playerFourPiece;
-            default: return null;
         }
     }
 }

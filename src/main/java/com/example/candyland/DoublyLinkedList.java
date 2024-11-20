@@ -90,14 +90,14 @@ public class DoublyLinkedList {
                 {1139, 313}, // Purple_10
                 {1164, 363} // GameEndSquare
         };
-        head = new Node(0,"Rainbow", 0, "Start",coordinates[0][0],coordinates[0][1]);
+        head = new Node(0,"Rainbow", 0, "Start",coordinates[0][0]-Math.random()*2-20,coordinates[0][1]-60);
         Node current = head;
 
         for (int i=1; i<coordinates.length; i++) {
             String color = getColorForSpace(i);
 
-            double x = coordinates[i][0]+Math.random() *2-1;
-            double y = coordinates[i][1]+Math.random()*2-1;
+            double x = coordinates[i][0]+Math.random() *2-20;
+            double y = coordinates[i][1]+Math.random() *2-60;
             Node newNode = new Node(i, color, 0, "Space "+i,x,y);
             current.next = newNode;
             newNode.prev = current;
