@@ -19,7 +19,7 @@ import javafx.util.Duration;
 public class Spinner {
     private ImageView candyCaneSpinner; // ImageView reference for spinner
     private final Random random = new Random();
-
+    
     // constructor for Spinner object
     public Spinner (ImageView candyCaneSpinner) {
         this.candyCaneSpinner = candyCaneSpinner;
@@ -50,7 +50,7 @@ public class Spinner {
      */
     public void movePiece(Players piece, int randomDegrees) {
         String result = getColorFromDegrees(randomDegrees); // Random result based on degrees
-
+        
         switch (result) {
             case "Red_Single": // red
                 piece.currentSpace = piece.currentSpace.moveForward(piece.currentSpace, "Red");
@@ -127,5 +127,13 @@ public class Spinner {
 
         // Default case (shouldn't happen)
         return "Unknown";
+    }
+
+    private Node doubleMove(Players piece, String color) {
+        Node current = piece.currentSpace;
+        for (int numTimes = 0; numTimes < 2; numTimes++) {
+            current = current.moveForward(current, color);
+        }
+        return current;
     }
 }
