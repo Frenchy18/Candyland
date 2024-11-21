@@ -95,14 +95,18 @@ public class CandyLandController {
             targetSpace = currentSpace.moveForward(currentSpace, color); // Move to the first square
             if (targetSpace != null) {
                 targetSpace = targetSpace.moveForward(targetSpace, color); // Move to the second square
-                if (targetSpace.getSpaceNumber() == 7) {
-                    targetSpace = gameMoves.findSpaceByNumber(31);
+                if (targetSpace != null) {
+                    if (targetSpace.getSpaceNumber() == 7) {
+                        targetSpace = gameMoves.findSpaceByNumber(31);
+                    }
                 }
             }
         } else {
             targetSpace = currentSpace.moveForward(currentSpace, color); // Move to the first square only
-            if (targetSpace.getSpaceNumber() == 7) {
-                targetSpace = gameMoves.findSpaceByNumber(31);
+            if (targetSpace != null) {
+                if (targetSpace.getSpaceNumber() == 7) {
+                    targetSpace = gameMoves.findSpaceByNumber(31);
+                }
             }
         }
 
