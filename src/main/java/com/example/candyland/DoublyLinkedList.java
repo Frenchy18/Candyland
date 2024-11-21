@@ -1,26 +1,49 @@
+/**
+ * PROGRAM PURPOSE: To initialize and manage the CandyLand game board using a doubly linked list.
+ * Games board is initialized  as a sequence of nodes, where each node corresponds to a square on the
+ * CandyLand game board. Each node contains information about the color, type, and number of the square
+ * along with their coordinates for usage in display and movement.
+ * Authors: Vincent Baccari, Chris Groves, Chase Lewis, Daniela Luna, and Kian Miley
+ * Date: 11/22/2024
+ * Section: CSC 331-002
+ */
+
 package com.example.candyland;
 
 
 public class DoublyLinkedList {
     private Node startNode;
     private Node endNode;
-
+    /**
+     * Constructs empty DoublyLinkedList with no nodes, but start and end nodes initialized.
+     */
     public DoublyLinkedList(){
         this.startNode = startNode;
         this.endNode = endNode;
     }
-
+    /**
+     * Returns the starting node of the doubly linked list, the first square of the CandyLand game board.
+     * @return startNode, starting node of the list.
+     */
     public Node getStart() {
         return startNode;
     }
-
+    /**
+     * Returns the ending node of the doubly linked list, the final square of the CandyLand game board.
+     * @return endNode, final node of the list.
+     */
     public Node getEnd() {
         return endNode;
     }
-
+    /**
+     * Initializes the CandyLand game board by creating nodes for each square
+     * and inserting them as nodes into a doubly linked list. Each node represents a color square
+     * on the board, and the list is formed by connecting each node to its next and previous squares.
+     * The list also displays info nodes in list using while loop iterating over each node and printing info
+     */
     public void initializeBoard() {
 
-        // Create nodes
+        // Create nodes for each space on board
         Node gameStart = new Node(0, "Start", 0, "Game Start", 66, 624);
         Node red1 = new Node(1, "Red", 0, "Red Square", 116, 574);
         Node green1 = new Node(2, "Green", 0, "Green Square", 146, 574);
@@ -89,7 +112,7 @@ public class DoublyLinkedList {
         Node gameEnd = new Node(65, "End", 0, "Game End", 1164, 313);
 
 
-        // Linking nodes into a doubly linked list
+        // Linking nodes into a doubly linked list to assemble full board
         gameStart.next = red1;
 
         red1.prev = gameStart;

@@ -1,3 +1,12 @@
+/**
+ * PROGRAM PURPOSE: To launch the CandyLand game application by setting up the initial
+ * menu screen and managing the primary stage. JavaFX is used to load and display the main menu
+ * interface, where players can start the game.
+ * Authors: Vincent Baccari, Chris Groves, Chase Lewis, Daniela Luna, and Kian Miley
+ * Date: 11/22/2024
+ * Section: CSC 331-002
+ */
+
 package com.example.candyland;
 
 import javafx.application.Application;
@@ -9,9 +18,10 @@ import java.io.IOException;
 
 public class CandyLand extends Application {
     /**
-     * Currently loads but does not show images. (Will work on fix)
-     * @param stage
-     * @throws IOException
+     * Initializes the stage and sets the initial scene for the CandyLand game by loading
+     * the FXML file for the main menu of the game, setting the title of the stage, and displaying the scene
+     * @param stage Primary stage of the CandyLand application
+     * @throws IOException thrown if an issue occurs loading the FXML file for the menu scene
      */
     @Override
     public void start(Stage stage) throws IOException {
@@ -21,7 +31,8 @@ public class CandyLand extends Application {
         stage.setScene(gameMenu);
         stage.show();
     }
-
+    /**
+     * Launches CandyLand game application
+     */
     public static void main(String[] args) {launch(); }
-
 }
