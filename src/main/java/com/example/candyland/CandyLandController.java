@@ -28,7 +28,6 @@ import javafx.scene.effect.MotionBlur;
 import javafx.animation.TranslateTransition;
 import javafx.util.Duration;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -291,6 +290,18 @@ public class CandyLandController {
         Stage stage = (Stage) ((Node) exit.getSource()).getScene().getWindow();
         stage.close();
     }
+
+    @FXML
+    private void buttonReturnMenu(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("CandyLand_Menu.fxml"));
+        Scene scene = new Scene(loader.load());
+
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+    }
+
     /**
      * Exits the game entirely by terminating the program.
      */
