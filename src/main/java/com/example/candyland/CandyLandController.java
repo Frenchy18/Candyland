@@ -28,7 +28,6 @@ import javafx.scene.effect.MotionBlur;
 import javafx.animation.TranslateTransition;
 import javafx.util.Duration;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,6 +36,7 @@ public class CandyLandController {
     private DoublyLinkedList gameMoves;
     private int currentTurn;
     private List<Players> playersList;
+    private boolean gameWon;
 
     @FXML private ImageView playerOnePiece, playerTwoPiece, playerThreePiece, playerFourPiece;
     /**
@@ -45,6 +45,7 @@ public class CandyLandController {
      */
     @FXML
     public void initialize() {
+        gameWon = false;
         gameMoves = new DoublyLinkedList();
         gameMoves.initializeBoard();
 
@@ -110,7 +111,8 @@ public class CandyLandController {
             }
         }
 
-        if (targetSpace == null && currentSpace.spaceNumber >= 59) {
+        if (targetSpace == null && currentSpace.spaceNumber >= 53) {
+            gameWon = true;
             targetSpace = currentSpace.moveForward(currentSpace,"End");
             movePieceOnBoard(player ,targetSpace);
             System.out.println("Player "+ (currentTurn + 1) +" You won!");
@@ -221,7 +223,9 @@ public class CandyLandController {
                 movePlayer(currentPlayer,moveType);
 
                 currentTurn = (currentTurn+1) % playersList.size();
-                playerTurnLabel.setText("Player " + (currentTurn +1) + ", it's your turn!");
+                if (!gameWon) {
+                    playerTurnLabel.setText("Player " + (currentTurn + 1) + ", it's your turn!");
+                }
             });
             slowTransition.play();
         });
@@ -286,6 +290,18 @@ public class CandyLandController {
         Stage stage = (Stage) ((Node) exit.getSource()).getScene().getWindow();
         stage.close();
     }
+
+    @FXML
+    private void buttonReturnMenu(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("CandyLand_Menu.fxml"));
+        Scene scene = new Scene(loader.load());
+
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+    }
+
     /**
      * Exits the game entirely by terminating the program.
      */
