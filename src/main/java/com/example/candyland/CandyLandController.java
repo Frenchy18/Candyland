@@ -37,6 +37,7 @@ public class CandyLandController {
     private DoublyLinkedList gameMoves;
     private int currentTurn;
     private List<Players> playersList;
+    private boolean gameWon;
 
     @FXML private ImageView playerOnePiece, playerTwoPiece, playerThreePiece, playerFourPiece;
     /**
@@ -45,6 +46,7 @@ public class CandyLandController {
      */
     @FXML
     public void initialize() {
+        gameWon = false;
         gameMoves = new DoublyLinkedList();
         gameMoves.initializeBoard();
 
@@ -110,7 +112,8 @@ public class CandyLandController {
             }
         }
 
-        if (targetSpace == null && currentSpace.spaceNumber >= 59) {
+        if (targetSpace == null && currentSpace.spaceNumber >= 53) {
+            gameWon = true;
             targetSpace = currentSpace.moveForward(currentSpace,"End");
             movePieceOnBoard(player ,targetSpace);
             System.out.println("Player "+ (currentTurn + 1) +" You won!");
@@ -221,7 +224,9 @@ public class CandyLandController {
                 movePlayer(currentPlayer,moveType);
 
                 currentTurn = (currentTurn+1) % playersList.size();
-                playerTurnLabel.setText("Player " + (currentTurn +1) + ", it's your turn!");
+                if (!gameWon) {
+                    playerTurnLabel.setText("Player " + (currentTurn + 1) + ", it's your turn!");
+                }
             });
             slowTransition.play();
         });
