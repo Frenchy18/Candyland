@@ -112,6 +112,7 @@ public class CandyLandController {
 
         if (targetSpace == null && currentSpace.spaceNumber >= 59) {
             targetSpace = currentSpace.moveForward(currentSpace,"End");
+            movePieceOnBoard(player ,targetSpace);
             System.out.println("Player "+ (currentTurn + 1) +" You won!");
             playerTurnLabel.setText("Player " + (currentTurn + 1) + ", you won!");
             activateSpinnerButton.setDisable(true);
