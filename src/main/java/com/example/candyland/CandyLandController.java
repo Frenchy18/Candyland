@@ -5,6 +5,7 @@ package com.example.candyland;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 // fix this
 import javafx.scene.Scene;
@@ -52,6 +53,8 @@ public class CandyLandController {
         }
     }
 
+    @FXML
+    Button activateSpinnerButton;
     private void movePlayer(Players player, String moveType) {
         com.example.candyland.Node currentSpace = player.getCurrentSpace();
         com.example.candyland.Node targetSpace = null;
@@ -66,7 +69,10 @@ public class CandyLandController {
         boolean isDouble = moveParts.length > 1 && moveParts[1].equalsIgnoreCase("Double");
 
         // Traverse to the target space
-        if (isDouble) {
+
+        if (currentSpace.getSpaceNumber() == 7) {
+            targetSpace = gameMoves.findSpaceByNumber(31);
+        } else if (isDouble) {
             targetSpace = currentSpace.moveForward(currentSpace, color); // Move to the first square
             if (targetSpace != null) {
                 targetSpace = targetSpace.moveForward(targetSpace, color); // Move to the second square
@@ -79,9 +85,13 @@ public class CandyLandController {
             targetSpace = currentSpace.moveForward(currentSpace,"End");
             System.out.println("Player "+ (currentTurn) +" You won!");
             playerTurnLabel.setText("Player " + (currentTurn) + ", you won!");
-            System.exit(0);
-        } else if (targetSpace == null) {
-            System.out.println("Error: Null exception");
+            activateSpinnerButton.setDisable(true);
+            return;
+
+        }
+        if (targetSpace == null) {
+            System.out.println("Error: No valid target space for moveType: "+moveType);
+            return;
         }
 
         // Update the player's current space and move the piece

@@ -57,4 +57,5 @@ public class Node {
     public String getColor() {
         return color;
     }
+
 }

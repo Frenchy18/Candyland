@@ -23,12 +23,12 @@ public class DoublyLinkedList {
         // Create nodes
         Node gameStart = new Node(0, "Start", 0, "Game Start", 66, 624);
         Node red1 = new Node(1, "Red", 0, "Red Square", 116, 574);
-        Node green1 = new Node(2, "Green", 0, "Green Square", 166, 574);
-        Node blue1 = new Node(3, "Blue", 0, "Blue Square", 216, 574);
-        Node yellow1 = new Node(4, "Yellow", 0, "Yellow Square", 116, 574);
-        Node orange1 = new Node(5, "Orange", 0, "Orange Square", 266, 574);
-        Node purple1 = new Node(6, "Purple", 0, "Purple Square", 316, 574);
-        Node red2 = new Node(7, "Red", 0, "Red Square", 366, 574);
+        Node green1 = new Node(2, "Green", 0, "Green Square", 146, 574);
+        Node blue1 = new Node(3, "Blue", 0, "Blue Square", 206, 574);
+        Node yellow1 = new Node(4, "Yellow", 0, "Yellow Square", 246, 574);
+        Node orange1 = new Node(5, "Orange", 0, "Orange Square", 296, 574);
+        Node purple1 = new Node(6, "Purple", 0, "Purple Square", 346, 574);
+        Node red2 = new Node(7, "Red", 0, "Red Square", 416, 574);
         Node green2 = new Node(8, "Green", 0, "Green Square", 416, 574);
         Node blue2 = new Node(9, "Blue", 0, "Blue Square", 466, 574);
         Node yellow2 = new Node(10, "Yellow", 0, "Yellow Square", 516, 574);
@@ -290,11 +290,22 @@ public class DoublyLinkedList {
         endNode = gameEnd;
 
 
-        Node temp = startNode;
+        /*Node temp = startNode;
         while (temp != null) {
             System.out.println("Node: "+temp.spaceNumber + ": {"+temp.getX()+", "+temp.getY() + ")");
             temp = temp.next;
+        }*/
+    }
+
+    public Node findSpaceByNumber(int spaceNumber) {
+        Node temp = null;
+        while (temp != null) {
+            if (temp.spaceNumber == spaceNumber) {
+                return temp;
+            }
+            temp = temp.next;
         }
+        return null;
     }
 
 }
