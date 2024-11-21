@@ -1,11 +1,11 @@
 /**
- * PROGRAM PURPOSE: To create a spinner class capable of creating a spinner object returning random
- * colors to dictate user movement, calling methods of the player and doublylinkedlist classes in order to
- * store and change data depending on results of spinner
- * Author: Chase Lewis
- * Date: 11/14/2024
+ * PROGRAM PURPOSE: To create a node class capable of storing data associated with space on CandyLand board, as well
+ * as x and y coordinates for usage in display, for usage in DoublyLinkedList for complete CandyLand game board.
+ * Authors: Vincent Baccari, Chris Groves, Chase Lewis, Daniela Luna, and Kian Miley
+ * Date: 11/22/2024
  * Section: CSC 331-002
  */
+
 package com.example.candyland;
 import java.util.Random;
 /**

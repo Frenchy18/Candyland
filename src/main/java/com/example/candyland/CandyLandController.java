@@ -1,3 +1,12 @@
+/**
+ * PROGRAM PURPOSE: To launch the CandyLand game application by setting up the initial
+ * menu screen and managing the primary stage. JavaFX is used to load and display the main menu
+ * interface, where players can start the game.
+ * Authors: Vincent Baccari, Chris Groves, Chase Lewis, Daniela Luna, and Kian Miley
+ * Date: 11/22/2024
+ * Section: CSC 331-002
+ */
+
 package com.example.candyland;
 
 // importing all classes from Candy land package
@@ -6,7 +15,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
-// fix this
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
@@ -29,14 +37,20 @@ public class CandyLandController {
     private List<Players> playersList;
 
     @FXML private ImageView playerOnePiece, playerTwoPiece, playerThreePiece, playerFourPiece;
-
+    /**
+     * Initializes the game board by setting up the linked list of spaces, called automatically when
+     * the controller is loaded.
+     */
     @FXML
     public void initialize() {
         gameMoves = new DoublyLinkedList();
         gameMoves.initializeBoard();
 
     }
-
+    /**
+     * Sets the number of players in the game, assigns each player a starting position on first space of board.
+     * @param numPlayers the number of players in the game
+     */
     private void setNumPlayers(int numPlayers) {
         if (gameMoves.getStart() == null) {
             System.out.println("Error: The board's starting node is null");
@@ -51,7 +65,11 @@ public class CandyLandController {
             System.out.println("Player " + (i+1) + " assigned to space: " + startNode.spaceNumber);
         }
     }
-
+    /**
+     * Moves the player to the target space based on the spin result.
+     * @param player the player object to move
+     * @param moveType the type of move based on the spinner result, such as red, or double orange
+     */
     private void movePlayer(Players player, String moveType) {
         com.example.candyland.Node currentSpace = player.getCurrentSpace();
         com.example.candyland.Node targetSpace = null;
@@ -75,7 +93,7 @@ public class CandyLandController {
             targetSpace = currentSpace.moveForward(currentSpace, color); // Move to the first square only
         }
 
-        if (targetSpace == null && currentSpace.spaceNumber >= 60) {
+        if (targetSpace == null && currentSpace.spaceNumber >= 59) {
             targetSpace = currentSpace.moveForward(currentSpace,"End");
             System.out.println("Player "+ (currentTurn) +" You won!");
             playerTurnLabel.setText("Player " + (currentTurn) + ", you won!");
@@ -91,7 +109,11 @@ public class CandyLandController {
         System.out.println("Player " + player.getName() + " moved to space: " + targetSpace.getSpaceNumber() +
                 " (" + targetSpace.getColor() + ")");
     }
-
+    /**
+     * Moves the player's piece on the board graphically based on the target space's coordinates.
+     * @param player the player whose piece needs to be moved
+     * @param targetSpace the target space the player is moving to
+     */
     private void movePieceOnBoard(Players player, com.example.candyland.Node targetSpace) {
         ImageView playerPiece = getPlayerPiece(player.getPlayerNumber());
 
@@ -107,7 +129,11 @@ public class CandyLandController {
             System.out.println("Error: Player piece or target space is null");
         }
     }
-
+    /**
+     * Returns the ImageView associated with the specified player number for usage in movement graphically
+     * @param playerNumber the number of the player piece
+     * @return the ImageView for the player piece
+     */
     private ImageView getPlayerPiece(int playerNumber) {
         switch (playerNumber) {
             case 1: return playerOnePiece;
@@ -117,7 +143,10 @@ public class CandyLandController {
             default: return null;
         }
     }
-
+    /**
+     * Spins the wheel to determine the next move for the current player, animating the spinner and
+     * processing the result when the spin finishes.
+     */
     @FXML private ImageView Spinner_Spinner;
     @FXML private Label playerTurnLabel;
     @FXML
@@ -137,7 +166,7 @@ public class CandyLandController {
         rotateTransition.setOnFinished(e -> {
             Spinner_Spinner.setEffect(null);
 
-            double randomAngle = Math.random() * 360;
+            int randomAngle = (int) (Math.random() * 360);
             RotateTransition slowTransition = new RotateTransition(Duration.seconds(1),Spinner_Spinner);
             slowTransition.setToAngle(randomAngle);
             slowTransition.setInterpolator(Interpolator.EASE_OUT);
@@ -157,8 +186,12 @@ public class CandyLandController {
 
         rotateTransition.play();
     }
-
-    private String determineMoveType(double angle) {
+    /**
+     * Determines the move type , including color and whether movement is doubled, based on the spinner's angle.
+     * @param angle the angle the spinner lands at
+     * @return a string representing the move type, such as red single or orange double
+     */
+    private String determineMoveType(int angle) {
         if (angle >= 279 && angle <= 300) return "Red_Single";
         if (angle >= 94 && angle <= 116) return "Red_Double";
         if ((angle >= 340 && angle <= 360) || (angle >= 0 && angle <= 6)) return "Green_Single";
@@ -181,6 +214,10 @@ public class CandyLandController {
     }
 
     // event handlers for the start menu
+    /**
+     * Starts the game by initializing the game board and moving to game screen.
+     * @param start the ActionEvent triggered by the "Start Game" button
+     */
     @FXML void buttonStartGame(ActionEvent start) {
         gameMoves = new DoublyLinkedList();
         gameMoves.initializeBoard();
@@ -197,33 +234,56 @@ public class CandyLandController {
             e.printStackTrace();
         }
     }
-
+    /**
+     * Ends the game by closing the current window.
+     * @param exit the ActionEvent triggered by the "End Game" button
+     */
     @FXML
     private void buttonEndGame(ActionEvent exit) {
         // get the current stage and close it
         Stage stage = (Stage) ((Node) exit.getSource()).getScene().getWindow();
         stage.close();
     }
+    /**
+     * Exits the game entirely by terminating the program.
+     */
     @FXML
     private void exitGameButton() {
         System.exit(0);
     }
-
+    /**
+     * Navigates to the game screen with two players selected.
+     * @param event the ActionEvent triggered by the "Two Players" button
+     * @throws IOException thrown if there's an error loading the FXML
+     */
     @FXML
     private void buttonTwoPlayers(ActionEvent event) throws IOException {
         navigateToGameScreen(event,2);
     }
-
+    /**
+     * Navigates to the game screen with three players selected.
+     * @param event the ActionEvent triggered by the "Three Players" button
+     * @throws IOException thrown if there's an error loading the FXML
+     */
     @FXML
     private void buttonThreePlayers(ActionEvent event) throws IOException {
         navigateToGameScreen(event,3);
     }
-
+    /**
+     * Navigates to the game screen with four players selected.
+     * @param event the ActionEvent triggered by the "Four Players" button
+     * @throws IOException thrown if there's an error loading the FXML
+     */
     @FXML
     private void buttonFourPlayers(ActionEvent event) throws IOException {
         navigateToGameScreen(event,4);
     }
-
+    /**
+     * Navigates to the game screen based on the selected number of players.
+     * @param event the ActionEvent triggered by the button
+     * @param numPlayers the number of players to set up
+     * @throws IOException if there's an error loading the FXML
+     */
     private void navigateToGameScreen(ActionEvent event, int numPlayers) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("CandyLand_Game.fxml"));
         Scene scene = new Scene(loader.load());
@@ -236,7 +296,10 @@ public class CandyLandController {
         stage.setScene(scene);
         stage.show();
     }
-
+    /**
+     * Sets the visibility of player pieces based on the number of players.
+     * @param numPlayers the number of players
+     */
     private void setPlayersEnabled(int numPlayers) {
         List<ImageView> playerPieces = List.of(playerOnePiece, playerTwoPiece, playerThreePiece, playerFourPiece);
 

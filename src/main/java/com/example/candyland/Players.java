@@ -1,85 +1,68 @@
-package com.example.candyland;
+/**
+ * PROGRAM PURPOSE: To create a player class for storing, changing, and retrieving information about each player
+ * in CandyLand, for usage in gameplay and display of current location of player objects
+ * Authors: Vincent Baccari, Chris Groves, Chase Lewis, Daniela Luna, and Kian Miley
+ * Date: 11/22/2024
+ * Section: CSC 331-002
+ */
 
+package com.example.candyland;
 
 public class Players {
     public Node currentSpace;
     private String name;           // Name of the player
     private int playerNumber;      // Identifier for the player
-    private Piece piece;           // Game piece for the player
-    private boolean isWinner;      // If any player has won
-    private int totalMoves;        // Total moves to help keep track of rounds
-
+    /**
+     * Creates a new player object with info about the current location of the player
+     * initialized as the starting space of the board, and a passed in name
+     * and player number, for usage in display, traversal, and gameplay of CandyLand
+     * @param name the name associated with the player
+     * @param playerNumber the number of the player
+     * @param startingSpace the initial space the player starts at
+     */
     public Players(String name, int playerNumber, Node startingSpace) {
         this.name = name;
         this.playerNumber = playerNumber;
-        this.piece = new Piece(startingSpace);
-        this.isWinner = false;
         this.currentSpace = startingSpace;
-        this.totalMoves = 0;
     }
-
-    // Accessors
+    /**
+     * Returns name of player object
+     * @return name, name of player object
+     */
     public String getName() {
         return name;
     }
-
+    /**
+     * Returns number of player object
+     * @return playerNumber, number of player object
+     */
     public int getPlayerNumber() {
         return playerNumber;
     }
-
+    /**
+     * Returns current space player object is on
+     * @return currentSpace, current space player object is located at
+     */
     public Node getCurrentSpace() {
         return currentSpace;
     }
-    public Piece getPiece() {
-        return piece;
-    }
-
-    public boolean isWinner() {
-        return isWinner;
-    }
-
-    public int getTotalMoves() {
-        return totalMoves;
-    }
-
-    // Mutators
+    /**
+     * Changes location of player object
+     * @param currentSpace, the space the player object should be moved to
+     */
     public void setCurrentSpace(Node currentSpace) {
         this.currentSpace = currentSpace;
     }
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setWinner(boolean winner) {
-        isWinner = winner;
-    }
-
-    // Moving piece based on spinner result
-    public void movePiece(int spinnerResult) {
-        piece.move(spinnerResult);
-        totalMoves += spinnerResult;
-
-        System.out.println(name + " moved " + spinnerResult + " spaces.");
-    }
-
-    // Check if the player has won
-    public boolean checkWin(Node finalSpace) {
-        if (piece.getCurrentSpace() == finalSpace) {
-            this.isWinner = true;
-            System.out.println(name + " has reached the final space and won!");
-        }
-        return isWinner;
-    }
-
-    // Debugging Helper
+    /**
+     * Overrides toString method to display all info for player object
+     * @return string containing all information for player object
+     */
     @Override
     public String toString() {
         return "Player{" +
                 "name='" + name + '\'' +
                 ", playerNumber=" + playerNumber +
-                ", currentSpace=" + piece.getCurrentSpace().spaceNumber +
-                ", isWinner=" + isWinner +
-                ", totalMoves=" + totalMoves +
+                ", currentSpace=" + getCurrentSpace().spaceNumber +
                 '}';
     }
 }
