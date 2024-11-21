@@ -1,3 +1,12 @@
+/**
+ * PROGRAM PURPOSE: To control all scenes of the CandyLand game, allowing users to choose the number of players,
+ * spin for each players turn, with methods to control the spinner, player movement, as well as display of all
+ * movement of players and spinner, until the board has been traversed fully by one player, at which point a winner is
+ * declared and the game ends
+ * Authors: Vincent Baccari, Chris Groves, Chase Lewis, Daniela Luna, and Kian Miley
+ * Date: 11/22/2024
+ * Section: CSC 331-002
+ */
 package com.example.candyland;
 
 // importing all classes from Candy land package
