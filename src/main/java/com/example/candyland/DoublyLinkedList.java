@@ -71,13 +71,13 @@ public class DoublyLinkedList {
         Node orange4 = new Node(24, "Orange", 0, "Orange Square", 765, 424);
         Node purple4 = new Node(25, "Purple", 0, "Purple Square", 715, 424);
         Node pink2Cupcake = new Node(26, "Pink2", 0, "Cupcake Square", 665, 424);
-        Node red5 = new Node(27, "Red", 0, "Red Square", 610, 424);
+        Node red5 = new Node(27, "Red", 0, "Red Square", 615, 424);
         Node green5 = new Node(28, "Green", 0, "Green Square", 570, 424);
         Node blue5 = new Node(29, "Blue", 0, "Blue Square", 520, 424);
         Node yellow5 = new Node(30, "Yellow", 0, "Yellow Square", 470, 424);
         Node orange5 = new Node(31, "Orange", 0, "Orange Square", 418, 409);
         Node purple5 = new Node(32, "Purple", 0, "Purple Square", 368, 384);
-        Node red6 = new Node(33, "Red", 0, "Red Square", 305, 359);
+        Node red6 = new Node(33, "Red", 0, "Red Square", 320, 359);
         Node green6 = new Node(34, "Green", 0, "Green Square", 268, 334);
         Node blue6 = new Node(35, "Blue", 0, "Blue Square", 218, 309);
         Node yellow6 = new Node(36, "Yellow", 0, "Yellow Square", 165, 285);
