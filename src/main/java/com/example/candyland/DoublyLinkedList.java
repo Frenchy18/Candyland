@@ -319,16 +319,21 @@ public class DoublyLinkedList {
             temp = temp.next;
         }*/
     }
-
+    /**
+     * Returns the node associated with number in list.
+     * @param spaceNumber, the number of the node being searched for
+     * @return temp, node associated with number.
+     */
     public Node findSpaceByNumber(int spaceNumber) {
-        Node temp = null;
+        // Start from the first node in the list (assuming `start` is the first node)
+        Node temp = this.startNode;  // assuming 'start' is the first node of your doubly linked list
         while (temp != null) {
             if (temp.spaceNumber == spaceNumber) {
-                return temp;
+                return temp;  // Found the space with the given number
             }
-            temp = temp.next;
+            temp = temp.next;  // Move to the next node
         }
-        return null;
+        return null;  // Return null if space is not found
     }
 
 }

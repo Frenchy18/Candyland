@@ -46,6 +46,12 @@ public class Node {
      * @return current, the new current space the player has moved to
      */
     public Node moveForward(Node currentSpace, String color) {
+        if (color.equalsIgnoreCase("Pink1") || color.equalsIgnoreCase("Pink2") ||
+                color.equalsIgnoreCase("Pink3") || color.equalsIgnoreCase("Pink4")) {
+            while (currentSpace.prev != null) {
+                currentSpace = currentSpace.prev;
+            }
+        }
         Node current = currentSpace.next; // Start with the next node
         while (current != null) {
             System.out.println("Traversing Node: " + current.spaceNumber + " with color: " + current.color);
@@ -86,5 +92,4 @@ public class Node {
     public String getColor() {
         return color;
     }
-
 }

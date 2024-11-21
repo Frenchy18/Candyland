@@ -62,8 +62,7 @@ public class CandyLandController {
 
     /**
      * Moves the player to the target space based on the spin result.
-     * @param player the player obj    @FXML
-     *     Button activateSpinnerButton;ect to move
+     * @param player the player object
      * @param moveType the type of move based on the spinner result, such as red, or double orange
      */
     @FXML
@@ -83,21 +82,25 @@ public class CandyLandController {
 
         // Traverse to the target space
 
-        if (currentSpace.getSpaceNumber() == 7) {
-            targetSpace = gameMoves.findSpaceByNumber(31);
-        } else if (isDouble) {
+        if (isDouble) {
             targetSpace = currentSpace.moveForward(currentSpace, color); // Move to the first square
             if (targetSpace != null) {
                 targetSpace = targetSpace.moveForward(targetSpace, color); // Move to the second square
+                if (targetSpace.getSpaceNumber() == 7) {
+                    targetSpace = gameMoves.findSpaceByNumber(31);
+                }
             }
         } else {
             targetSpace = currentSpace.moveForward(currentSpace, color); // Move to the first square only
+            if (targetSpace.getSpaceNumber() == 7) {
+                targetSpace = gameMoves.findSpaceByNumber(31);
+            }
         }
 
         if (targetSpace == null && currentSpace.spaceNumber >= 59) {
             targetSpace = currentSpace.moveForward(currentSpace,"End");
-            System.out.println("Player "+ (currentTurn) +" You won!");
-            playerTurnLabel.setText("Player " + (currentTurn) + ", you won!");
+            System.out.println("Player "+ (currentTurn + 1) +" You won!");
+            playerTurnLabel.setText("Player " + (currentTurn + 1) + ", you won!");
             activateSpinnerButton.setDisable(true);
             return;
 
@@ -126,6 +129,12 @@ public class CandyLandController {
             double targetX = targetSpace.getX();
             double targetY = targetSpace.getY();
 
+            int PlayersCount = countPlayersOnSpace(targetSpace);
+            if (PlayersCount > 1) {
+                // Add small offsets based on the number of players on the same space
+                targetX -= 4 * PlayersCount;
+            }
+
             TranslateTransition transition = new TranslateTransition(Duration.seconds(2),playerPiece);
             transition.setToX(targetX - playerPiece.getLayoutX());
             transition.setToY(targetY - playerPiece.getLayoutY());
@@ -133,6 +142,20 @@ public class CandyLandController {
         } else {
             System.out.println("Error: Player piece or target space is null");
         }
+    }
+    /**
+     * Checks if other players already on space
+     * @param targetSpace the space being moved to
+     * @return numPlayers the number of players on the space, includes player currently moving
+     */
+    private int countPlayersOnSpace(com.example.candyland.Node targetSpace) {
+        int numPlayers = 0;
+        for (Players player : playersList) {
+            if (player.getCurrentSpace().equals(targetSpace)) {
+                numPlayers++;
+            }
+        }
+        return numPlayers;
     }
     /**
      * Returns the ImageView associated with the specified player number for usage in movement graphically
