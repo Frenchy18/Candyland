@@ -199,37 +199,29 @@ public class CandyLandController {
             System.out.println("Error: playersList is empty");
             return;
         }
-        RotateTransition rotateTransition = new RotateTransition(Duration.seconds(2),Spinner_Spinner);
-        rotateTransition.setByAngle(1080);
+        int randomAngle = (int) (Math.random() * 360);
+        RotateTransition rotateTransition = new RotateTransition(Duration.seconds(2), Spinner_Spinner);
+        rotateTransition.setByAngle(1440 + randomAngle);
         rotateTransition.setInterpolator(Interpolator.EASE_OUT);
         rotateTransition.setCycleCount(1);
 
         MotionBlur motionBlur = new MotionBlur();
         Spinner_Spinner.setEffect(motionBlur);
-
         rotateTransition.setOnFinished(e -> {
             Spinner_Spinner.setEffect(null);
 
-            int randomAngle = (int) (Math.random() * 360);
-            RotateTransition slowTransition = new RotateTransition(Duration.seconds(1),Spinner_Spinner);
-            slowTransition.setToAngle(randomAngle);
-            slowTransition.setInterpolator(Interpolator.EASE_OUT);
-            slowTransition.setCycleCount(1);
-            slowTransition.setOnFinished(ev -> {
-                String moveType = determineMoveType(randomAngle);
-                System.out.println("Spinner landed on: "+moveType);
+            int finalAngle = (int) (Spinner_Spinner.getRotate() % 360);
+            String moveType = determineMoveType(finalAngle);
+            System.out.println("Spinner landed on: " + moveType);
 
-                Players currentPlayer = playersList.get(currentTurn);
-                movePlayer(currentPlayer,moveType);
+            Players currentPlayer = playersList.get(currentTurn);
+            movePlayer(currentPlayer, moveType);
 
-                currentTurn = (currentTurn+1) % playersList.size();
-                if (!gameWon) {
-                    playerTurnLabel.setText("Player " + (currentTurn + 1) + ", it's your turn!");
-                }
-            });
-            slowTransition.play();
+            currentTurn = (currentTurn + 1) % playersList.size();
+            if (!gameWon) {
+                playerTurnLabel.setText("Player " + (currentTurn + 1) + ", it's your turn!");
+            }
         });
-
         rotateTransition.play();
     }
     /**
