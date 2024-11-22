@@ -26,7 +26,7 @@ public class CandyLand extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader gameLoader = new FXMLLoader(CandyLand.class.getResource("CandyLand_Menu.fxml"));
-        Scene gameMenu = new Scene(gameLoader.load(), 1100, 720);
+        Scene gameMenu = new Scene(gameLoader.load(), 1280, 720);
         stage.setTitle("CandyLand");
         stage.setScene(gameMenu);
         stage.show();
