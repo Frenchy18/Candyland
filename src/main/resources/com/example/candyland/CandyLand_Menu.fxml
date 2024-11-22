@@ -6,34 +6,33 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.Pane?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/17.0.6" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.candyland.CandyLandController">
-   <center>
-      <AnchorPane BorderPane.alignment="CENTER">
-         <children>
-            <ImageView blendMode="DARKEN" fitHeight="720.0" fitWidth="1280.0" layoutX="-76.0" layoutY="-403.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="-400.0">
-               <image>
-                  <Image url="@../../../images/MainMenuScreen.jpg" />
-               </image>
-            </ImageView>
-          <Button fx:id="buttonStartGame" layoutX="392.0" layoutY="62.0" mnemonicParsing="false" onAction="#buttonStartGame" snapToPixel="false" text="Start Game" AnchorPane.rightAnchor="600.0">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button fx:id="buttonEndGame" layoutX="524.0" layoutY="63.0" mnemonicParsing="false" onAction="#buttonEndGame" text="Exit Game" AnchorPane.rightAnchor="500.0" />
-         </children>
-      </AnchorPane>
-   </center>
-   <left>
-      <StackPane BorderPane.alignment="CENTER" />
-   </left>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.candyland.CandyLandController">
    <top>
-      <ImageView fitHeight="400.0" fitWidth="680.0" BorderPane.alignment="CENTER">
-         <image>
-            <Image url="@../../../images/CandyLand_Title.png" />
-         </image>
-      </ImageView>
+      <Pane prefHeight="720.0" prefWidth="1280.0" BorderPane.alignment="CENTER">
+         <children>
+            <AnchorPane>
+               <children>
+                  <ImageView blendMode="DARKEN" fitHeight="720.0" fitWidth="1280.0">
+                     <image>
+                        <Image url="@../../../images/MainMenuScreen.jpg" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="400.0" fitWidth="680.0" layoutX="300.0">
+                     <image>
+                        <Image url="@../../../images/CandyLand_Title.png" />
+                     </image>
+                  </ImageView>
+                <Button fx:id="buttonStartGame" alignment="CENTER" layoutX="542.0" layoutY="400.0" mnemonicParsing="false" onAction="#buttonStartGame" snapToPixel="false" text="Start Game" AnchorPane.rightAnchor="662.0">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="buttonEndGame" layoutX="687.0" layoutY="400.0" mnemonicParsing="false" onAction="#buttonEndGame" text="Exit Game" AnchorPane.rightAnchor="524.0" />
+               </children>
+            </AnchorPane>
+         </children>
+      </Pane>
    </top>
 </BorderPane>
