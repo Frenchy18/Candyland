@@ -9,14 +9,14 @@
  */
 package com.example.candyland;
 
-// importing all classes from Candy land package
+// importing all classes for Candy land package
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-// fix this
+
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
